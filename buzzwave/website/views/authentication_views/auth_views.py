@@ -3,6 +3,10 @@ from django.urls import reverse
 from django.views.generic import View
 from django.http import HttpRequest, JsonResponse
 from django.contrib.auth import authenticate, login
+from django.views.decorators.http import require_http_methods
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+from django.conf import settings
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -42,3 +46,34 @@ class LoginView(View):
         
         else:
             return JsonResponse({'message':'일치하는 회원정보가 없습니다'}, status = 400)
+
+@require_http_methods(["POST"])
+def contact(request: HttpRequest):
+    '''
+        메일 전송
+    '''
+    name = request.POST['name']
+    email = request.POST['email']
+    phone = request.POST['phone']
+    message = request.POST['message']
+    to_email = 'yttrendreport@gmail.com'
+
+    try:
+        message = render_to_string('authentication/contact_email.html', {
+            'name' : name,
+            'email' : email,
+            'phone' : phone,
+            'message' : message
+        })
+
+        mail_title = f"[Buzz Wave] Contact email ({name})"
+        sendEmail = EmailMessage(mail_title, message, settings.EMAIL_HOST_USER, to=[to_email])
+        sendEmail.send()
+    except Exception as e:
+        return JsonResponse({
+            'message' : 'Send Error'
+        }, status = 400)
+
+    return JsonResponse({
+        'message' : 'Your email has been sent. We will contact you as soon as possible using the contact information you provided.'
+    }, status = 200)

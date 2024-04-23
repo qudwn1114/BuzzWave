@@ -142,3 +142,10 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = config['EMAILS']['EMAIL_HOST'] 	
+EMAIL_PORT = config['EMAILS']['EMAIL_PORT'] 
+EMAIL_HOST_USER = config['EMAILS']['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = config['EMAILS']['EMAIL_HOST_PASSWORD']
+EMAIL_USE_TLS = True			 
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
