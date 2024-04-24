@@ -1,0 +1,34 @@
+{% extends "layouts/website_base.html" %}
+{% load static %}
+
+{% block stylesheets %}
+{% endblock stylesheets %}
+
+
+{% block content %}
+<div class="main">
+    <section class="module">
+        <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <h2 class="module-title font-alt">Verify your email address</h2>
+                <div class="module-subtitle font-serif">
+                    <b>{{username}},</b><br>
+                    An email has been sent to the email address you signed up with.<br>
+                    Click the link in the email to activate your account.<br>
+                    <hr>
+                    If you didn't receive the email? Try sending it again.<br>
+                    <button class="btn btn-d btn-round" type="button" onclick="resend(this)">Resend</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    {% include 'includes/website/footer.html' %}
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'website/js/script_user_activation.js' %}"></script>
+{% endblock javascripts %}

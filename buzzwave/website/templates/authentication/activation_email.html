@@ -1,0 +1,10 @@
+{% autoescape off %}
+
+{{user.username}}
+
+Please click the link below to complete the BuzzWave email authentication process.
+
+http://{{domain}}{% url 'website:activate' uidb64=uid token=token %}
+
+
+{% endautoescape %}
