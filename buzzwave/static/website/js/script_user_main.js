@@ -11,6 +11,18 @@ const error_message = document.getElementById('message-error');
 
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+window.onload = function(){
+    let hash = window.location.hash;
+    let duration = 1000;
+    if (hash !== null && hash !== '') { // it was indeed ending in -st
+        if($(hash).length == 0){
+            return;
+        }
+        $('html, body').animate({
+            scrollTop: $(hash).offset().top - 50
+        }, duration);
+    }
+}
 
 btn_submit.addEventListener("click", async() => {
     if(!validation()){
