@@ -20,6 +20,8 @@ from django.contrib.auth.models import User
 from website.views.authentication_views.validate_views import validate_username, validate_password, validate_birth
 from website.tokens import account_activation_token
 
+import datetime
+
 # Create your views here.
 class HomeView(View):
     '''
@@ -112,13 +114,13 @@ class SignupView(View):
         try:
             with transaction.atomic(): 
                 user = User.objects.create_user(
-                    username=email,
+                    username=username,
                     email=email,
                     password=password
                 )
                 user.is_active = False
                 user.profile.membername = membername.strip()
-                user.profile.birth = birth
+                user.profile.birth = datetime.datetime.strptime(birth, "%Y%m%d")
                 user.profile.phone = phone.strip()
                 user.profile.company = company.strip()
                 user.profile.email_verified = False

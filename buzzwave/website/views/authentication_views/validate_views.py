@@ -66,7 +66,7 @@ def validate_password(password):
     '''
     try:
         # Minimum eight characters Maximum 16 characters, at least one letter and one number
-        RegexValidator(regex=r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$')(password)
+        RegexValidator(regex=r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d~#?!@$%^&*-+]{8,16}$')(password)
 
         # Minimum eight characters  Maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and one special character
         # RegexValidator(regex=r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~#?!@$%^&*-+])[A-Za-z\d~#?!@$%^&*-+]{8,16}$')(password)
