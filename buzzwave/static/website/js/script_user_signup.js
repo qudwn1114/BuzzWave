@@ -238,7 +238,7 @@ function validation() {
 
 //비밀번호 정규식
 function regPassword(str) {
-    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(str)) {
+    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d~#?!@$%^&*-+]{8,16}$/.test(str)) {
         return false;
     }
     return true;

@@ -20,6 +20,8 @@ from django.contrib.auth.models import User
 from website.views.authentication_views.validate_views import validate_username, validate_password, validate_birth
 from website.tokens import account_activation_token
 
+import datetime
+
 # Create your views here.
 class HomeView(View):
     '''
@@ -44,19 +46,26 @@ class LoginView(View):
     def post(self, request: HttpRequest, *args, **kwargs):
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        
-        if user is not None:
-            login(request, user)
-            if 'next' in request.GET:
-                url = request.GET.get('next')
-                url = url.split('?next=')[-1]
-            else:
-                url = reverse('website:home')
-            return JsonResponse({'message':'Hi.', 'url':url}, status = 200)
-        
+        try:
+            user = User.objects.get(username=username)
+        except:
+            return JsonResponse({'message':'username or password.'}, status = 400)
+        if not user.check_password(raw_password=password):
+            return JsonResponse({'message':'username or password.'}, status = 400)
+        if user.profile.withdrawal_at:
+            return JsonResponse({'message':'withdrawal account.'}, status = 400)
+        if not user.profile.email_verified:
+            return JsonResponse({'message':'please verify your email.', 'url':reverse('website:activation_confirm') + f'?username={username}'}, status = 403)
+        if not user.is_active:
+            return JsonResponse({'message':'deactivated account'}, status = 400)
+        login(request, user)
+        if 'next' in request.GET:
+            url = request.GET.get('next')
+            url = url.split('?next=')[-1]
         else:
-            return JsonResponse({'message':'Incorrect username or password.'}, status = 400)
+            url = reverse('website:home')
+        return JsonResponse({'message':'Hi.', 'url':url}, status = 200)
+    
 
 class SignupView(View):
     '''
@@ -112,13 +121,13 @@ class SignupView(View):
         try:
             with transaction.atomic(): 
                 user = User.objects.create_user(
-                    username=email,
+                    username=username,
                     email=email,
                     password=password
                 )
                 user.is_active = False
                 user.profile.membername = membername.strip()
-                user.profile.birth = birth
+                user.profile.birth = datetime.datetime.strptime(birth, "%Y%m%d")
                 user.profile.phone = phone.strip()
                 user.profile.company = company.strip()
                 user.profile.email_verified = False

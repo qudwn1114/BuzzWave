@@ -24,8 +24,13 @@ btn_login.addEventListener("click", () => {
             location.href = data.url;
         },
         error: function(error) {
-            error_login.innerText=error.responseJSON.message;
-            btn_login.disabled=false;
+            if(error.status == 403){
+                error_login.innerText=error.responseJSON.message;
+                location.href = data.url;
+            }else{
+                error_login.innerText=error.responseJSON.message;
+                btn_login.disabled=false;
+            }
         },
     });
 });
