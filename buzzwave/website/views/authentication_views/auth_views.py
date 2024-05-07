@@ -140,7 +140,7 @@ class SignupView(View):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
-            mail_title = "[Buzzwave] Activate your account"
+            mail_title = "[D'Nova] Activate your account"
             sendEmail = EmailMessage(mail_title, message, settings.EMAIL_HOST_USER, to=[email])
             sendEmail.send()
                 
@@ -181,7 +181,7 @@ class ActivationConfirmView(View):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
-            mail_title = "[Buzzwave] Activate your account"
+            mail_title = "[D'Nova] Activate your account"
             sendEmail = EmailMessage(mail_title, message, settings.EMAIL_HOST_USER, to=[user.email])
             sendEmail.send()
             return JsonResponse({"url":reverse('website:activation_confirm') + f'?username={user.username}', "message":"Email sent completed"}, status=status.HTTP_200_OK)
@@ -225,7 +225,7 @@ def contact(request: HttpRequest):
             'message' : message
         })
 
-        mail_title = f"[Buzz Wave] Contact email ({name})"
+        mail_title = f"[D'Nova] Contact email ({name})"
         sendEmail = EmailMessage(mail_title, message, settings.EMAIL_HOST_USER, to=[to_email])
         sendEmail.send()
     except Exception as e:
