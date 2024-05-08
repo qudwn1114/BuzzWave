@@ -141,7 +141,7 @@ class SignupView(View):
                 'token': account_activation_token.make_token(user),
             })
             mail_title = "[D'Nova] Activate your account"
-            sendEmail = EmailMessage(mail_title, message, settings.EMAIL_HOST_USER, to=[email])
+            sendEmail = EmailMessage(mail_title, message, f"D'Nova <{settings.EMAIL_HOST_USER}>", to=[email])
             sendEmail.send()
                 
         except Exception as e:
@@ -182,7 +182,7 @@ class ActivationConfirmView(View):
                 'token': account_activation_token.make_token(user),
             })
             mail_title = "[D'Nova] Activate your account"
-            sendEmail = EmailMessage(mail_title, message, settings.EMAIL_HOST_USER, to=[user.email])
+            sendEmail = EmailMessage(mail_title, message, f"D'Nova <{settings.EMAIL_HOST_USER}>", to=[user.email])
             sendEmail.send()
             return JsonResponse({"url":reverse('website:activation_confirm') + f'?username={user.username}', "message":"Email sent completed"}, status=status.HTTP_200_OK)
         else:
@@ -215,7 +215,7 @@ def contact(request: HttpRequest):
     email = request.POST['email']
     phone = request.POST['phone']
     message = request.POST['message']
-    to_email = 'yttrendreport@gmail.com'
+    to_email = 'dnova@d-nova.com'
 
     try:
         message = render_to_string('authentication/contact_email.html', {
@@ -225,8 +225,8 @@ def contact(request: HttpRequest):
             'message' : message
         })
 
-        mail_title = f"[D'Nova] Contact email ({name})"
-        sendEmail = EmailMessage(mail_title, message, settings.EMAIL_HOST_USER, to=[to_email])
+        mail_title = f"Contact from {name}"
+        sendEmail = EmailMessage(mail_title, message, f"Contact <{settings.EMAIL_HOST_USER}>", to=[to_email])
         sendEmail.send()
     except Exception as e:
         return JsonResponse({
