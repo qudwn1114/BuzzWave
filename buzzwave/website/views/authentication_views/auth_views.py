@@ -17,6 +17,7 @@ from django.db import transaction
 from django.conf import settings
 from django.contrib.auth.models import User
 
+from website.models import Subscriber
 from website.views.authentication_views.validate_views import validate_username, validate_password, validate_birth
 from website.tokens import account_activation_token
 
@@ -235,4 +236,25 @@ def contact(request: HttpRequest):
 
     return JsonResponse({
         'message' : 'Your email has been sent. We will contact you as soon as possible using the contact information you provided.'
+    }, status = 200)
+
+
+@require_http_methods(["POST"])
+def subscribe(request: HttpRequest):
+    '''
+        구독
+    '''
+    email = request.POST['email']
+    try:
+        validate_email(email)
+    except ValidationError:
+        return JsonResponse({"message": "Invalid email format."},
+            status=400)
+    try:
+        Subscriber.objects.get_or_create(email=email, is_activate=True)
+    except:
+        return JsonResponse({"message": "Subscribe Error."},
+            status=400)
+    return JsonResponse({
+        'message' : 'Thank you for subscribing!'
     }, status = 200)

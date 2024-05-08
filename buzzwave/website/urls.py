@@ -1,7 +1,7 @@
 from django.urls.conf import path
 from django.contrib.auth.views import LogoutView
 
-from website.views.authentication_views.auth_views import HomeView, LoginView, SignupView, ActivationConfirmView, activate, contact
+from website.views.authentication_views.auth_views import HomeView, LoginView, SignupView, ActivationConfirmView, activate, contact, subscribe
 from website.views.authentication_views.password_reset_views import UserPasswordResetView, UserPasswordResetDoneView, CustomPasswordResetConfirmView, UserPasswordResetCompleteView
 from website.views.authentication_views.validate_views import check_username, check_email, check_birth
 
@@ -21,6 +21,7 @@ urlpatterns = [
 
 
     path('contact/', contact),
+    path('subscribe/', subscribe),
 
     path('check-username/', check_username),
     path('check-email/', check_email),

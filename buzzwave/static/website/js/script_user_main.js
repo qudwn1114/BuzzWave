@@ -9,6 +9,9 @@ const error_email = document.getElementById('email-error');
 const error_phone = document.getElementById('phone-error');
 const error_message = document.getElementById('message-error');
 
+const semail = document.getElementById("semail");
+const btn_subscribe = document.getElementById('subscription-form-submit');
+
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
 window.onload = function(){
@@ -61,12 +64,52 @@ btn_submit.addEventListener("click", async() => {
     }
 });
 
+function enterkey(event) {
+    if (window.event.keyCode == 13) {
+        btn_subscribe.click()
+    }   
+}
+
+
+btn_subscribe.addEventListener("click", () => {
+    if(semail.value == ''){
+        semail.focus();
+        return;
+    }
+    if(!reg_email.test(semail.value)){
+        alert('Invalid email format.')
+        return;
+    }
+    btn_subscribe.disabled=true;
+    btn_subscribe.innerHTML='<i class="fa fa-cog fa-spin"></i> Wait...';
+    $.ajax({
+        type: "POST",
+        headers: {'X-CSRFToken': csrftoken},
+        url: "/subscribe/",
+        dataType: 'json',
+        data: {email:semail.value},
+        success: function(result) {
+            alert(result.message);
+            semail.value = '';
+            btn_subscribe.disabled=false;
+            btn_subscribe.innerHTML='Submit';
+        },
+        error: function(error) {
+            alert(error.responseJSON.message);
+            btn_subscribe.disabled=false;
+            btn_subscribe.innerHTML='Submit';
+        },
+    });
+    
+});
+
+const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 function validation(){
     error_name.innerText='';
     error_email.innerText='';
     error_phone.innerText='';
     error_message.innerText='';
-    let reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    
     let tf = true;
 
     if(input_name.value==''){

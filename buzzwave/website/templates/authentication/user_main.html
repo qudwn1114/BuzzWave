@@ -347,9 +347,9 @@
             </div>
             <div class="col-sm-6 col-md-6 col-lg-4">
               <div class="callout-btn-box">
-                <form id="subscription-form" role="form" method="post">
+                <form id="subscription-form" role="form" method="post" onsubmit="return false;">
                   <div class="input-group">
-                    <input class="form-control" type="email" id="semail" name="semail" placeholder="Your Email" required="required"/>
+                    <input class="form-control" type="email" id="semail" name="semail" placeholder="Your Email" required="required" onkeyup="enterkey(this)"/>
                     <span class="input-group-btn"><button class="btn btn-g btn-round" id="subscription-form-submit" type="button">Submit</button></span>
                   </div>
                 </form>
@@ -369,7 +369,7 @@
         </div>
         <div class="row">
             <div class="col-sm-8">
-            <form id="contactForm" role="form">
+            <form id="contactForm" role="form" onsubmit="return false;">
                 <div class="form-group">
                     <label class="sr-only" for="name">Name</label>
                     <input class="form-control" type="text" id="name" name="name" placeholder="Your Name*" required="required">
@@ -414,5 +414,5 @@
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="{% static 'website/js/script_user_main.js' %}?v=20240425"></script>
+<script type="text/javascript" src="{% static 'website/js/script_user_main.js' %}?v=20240509"></script>
 {% endblock javascripts %}

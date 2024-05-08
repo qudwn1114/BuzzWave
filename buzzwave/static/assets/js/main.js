@@ -564,37 +564,37 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
          * Subscribe form ajax
          /* ---------------------------------------------- */
 
-        $('#subscription-form').submit(function(e) {
+        // $('#subscription-form').submit(function(e) {
 
-            e.preventDefault();
-            var $form           = $('#subscription-form');
-            var submit          = $('#subscription-form-submit');
-            var ajaxResponse    = $('#subscription-response');
-            var email           = $('input#semail').val();
+        //     e.preventDefault();
+        //     var $form           = $('#subscription-form');
+        //     var submit          = $('#subscription-form-submit');
+        //     var ajaxResponse    = $('#subscription-response');
+        //     var email           = $('input#semail').val();
 
-            $.ajax({
-                type: 'POST',
-                url: 'assets/php/subscribe.php',
-                dataType: 'json',
-                data: {
-                    email: email
-                },
-                cache: false,
-                beforeSend: function(result) {
-                    submit.empty();
-                    submit.append('<i class="fa fa-cog fa-spin"></i> Wait...');
-                },
-                success: function(result) {
-                    if(result.sendstatus == 1) {
-                        ajaxResponse.html(result.message);
-                        $form.fadeOut(500);
-                    } else {
-                        ajaxResponse.html(result.message);
-                    }
-                }
-            });
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: 'assets/php/subscribe.php',
+        //         dataType: 'json',
+        //         data: {
+        //             email: email
+        //         },
+        //         cache: false,
+        //         beforeSend: function(result) {
+        //             submit.empty();
+        //             submit.append('<i class="fa fa-cog fa-spin"></i> Wait...');
+        //         },
+        //         success: function(result) {
+        //             if(result.sendstatus == 1) {
+        //                 ajaxResponse.html(result.message);
+        //                 $form.fadeOut(500);
+        //             } else {
+        //                 ajaxResponse.html(result.message);
+        //             }
+        //         }
+        //     });
 
-        });
+        // });
 
 
         /* ---------------------------------------------- /*

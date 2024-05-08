@@ -23,3 +23,11 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+class Subscriber(models.Model):
+    email = models.EmailField(verbose_name='이메일', unique=True)
+    is_activate = models.BooleanField(default=True, verbose_name='활성화여부')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='최초구독일')
+
+    class Meta:
+        db_table='subscriber'
