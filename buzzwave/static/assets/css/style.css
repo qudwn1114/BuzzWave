@@ -1717,7 +1717,7 @@ Google map
   padding: 25px 20px;
   margin: 15px 0 30px;
   border-radius: 2px;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .price-table:hover {
@@ -1777,10 +1777,10 @@ Google map
 }
 
 .price-table p.price {
-  font-size: 60px;
+  font-size: 30px;
   color: #111;
   padding: 0;
-  margin: 0 0 0 -10px;
+  margin: 0 0 0 0;
 }
 
 .price-table p.price span {
@@ -1791,6 +1791,7 @@ Google map
 }
 
 .price-details {
+  height: 200px;
   list-style: none;
   padding: 0;
   margin: 0 0 23px;
