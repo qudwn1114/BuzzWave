@@ -61,9 +61,11 @@
               {% endfor %}
 
               {% include 'pagination.html' %}
+              {% if user.is_superuser %}
               <div>
                 <a class="btn btn-border-d btn-round" href="{% url 'website:blog_create' %}">NEW POST</a>
-                </div>
+              </div>
+              {% endif %}
             </div>
           </div>
         </div>
