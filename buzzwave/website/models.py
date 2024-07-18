@@ -31,3 +31,30 @@ class Subscriber(models.Model):
 
     class Meta:
         db_table='subscriber'
+
+class Blog(models.Model):
+    image = models.ImageField(null=True, upload_to="image/blog/", verbose_name="썸네일")
+    title = models.CharField(max_length=100, verbose_name='제목')
+    content = models.TextField(verbose_name='내용')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "blog"
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50, verbose_name='태그명', unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "tag"
+
+
+class BlogTag(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='blog_tag')
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='blog_tag')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "blog_tag"

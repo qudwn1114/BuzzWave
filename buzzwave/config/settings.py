@@ -30,8 +30,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     #cors
     'corsheaders',
+
+    #summernote
+    'django_summernote',
 
     #app
     'website',
@@ -149,3 +153,6 @@ EMAIL_HOST_USER = config['EMAILS']['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = config['EMAILS']['EMAIL_HOST_PASSWORD']
 EMAIL_USE_SSL = True			 
 DEFAULT_FROM_EMAIL = f"D'Nova <{EMAIL_HOST_USER}>"
+
+SITE_URL = config['SITE_URL']
+SITE_NAME = config['SITE_NAME']

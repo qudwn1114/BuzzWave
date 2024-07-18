@@ -1,0 +1,24 @@
+<div class="pagination font-alt">
+    {% if page_obj.has_previous %}
+        <a href="javascript:;" onclick="page('{{ page_obj.previous_page_number }}')"><i class="fa fa-angle-left"></i></a>
+    {% else %}
+        <a href="javascript:;"><i class="fa fa-angle-left"></i></a>
+    {% endif %}
+    {% for page_number in pagelist %}
+        {% if page_number == page_obj.number %}
+            <a class="active" href="javascript:;">{{ page_number }}</a>
+        {% else %}
+            {% if page_number == page_obj.paginator.ELLIPSIS %}
+                <a href="javascript:;">{{ page_number }}</a>
+            {% else %}
+                <a href="javascript:;" onclick="page('{{page_number}}')">{{ page_number }}</a>
+            {% endif %}
+
+        {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+        <a href="javascript:;" onclick="page('{{ page_obj.next_page_number }}')"><i class="fa fa-angle-right"></i></a>
+    {% else %}
+        <a href="javascript:;"><i class="fa fa-angle-right"></i></a>
+    {% endif %}
+</div>

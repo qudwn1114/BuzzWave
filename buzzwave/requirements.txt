@@ -2,5 +2,6 @@
 pyyaml==6.0.1
 Django==4.2.11
 django-cors-headers==4.3.1
+django-summernote==0.8.20.0
 gunicorn==22.0.0
-
+Pillow==10.4.0
