@@ -12,22 +12,23 @@
       </div>
       <div class="col-sm-4">
         <div class="widget">
-          <h5 class="widget-title font-alt">Popular Posts</h5>
+          <h5 class="widget-title font-alt">Recent Posts</h5>
           <ul class="widget-posts">
+            {% for i in recent_post %}
             <li class="clearfix">
-              <div class="widget-posts-image"><a href="#"><img src="{% static 'assets/images/rp-1.jpg' %}" alt="Post Thumbnail"/></a></div>
+              <div class="widget-posts-image">
+                {% if i.imageUrl %}
+                  <a href="{% url 'website:blog_detail' i.id %}"><img src="{{i.imageUrl}}" alt="Post Thumbnail"/></a>
+                {% else %}
+                  <a href="{% url 'website:blog_detail' i.id %}"><img src="{% static 'assets/images/rp-1.jpg' %}" alt="Post Thumbnail"/></a>
+                {% endif %}
+              </div>
               <div class="widget-posts-body">
-                <div class="widget-posts-title"><a href="#">Designer Desk Essentials</a></div>
-                <div class="widget-posts-meta">23 january</div>
+                <div class="widget-posts-title"><a href="{% url 'website:blog_detail' i.id %}">{{i.title}}</a></div>
+                <div class="widget-posts-meta">{{i.createdAt}}</div>
               </div>
             </li>
-            <li class="clearfix">
-              <div class="widget-posts-image"><a href="#"><img src="{% static 'assets/images/rp-2.jpg' %}" alt="Post Thumbnail"/></a></div>
-              <div class="widget-posts-body">
-                <div class="widget-posts-title"><a href="#">Realistic Business Card Mockup</a></div>
-                <div class="widget-posts-meta">15 February</div>
-              </div>
-            </li>
+            {% endfor %}
           </ul>
         </div>
       </div>

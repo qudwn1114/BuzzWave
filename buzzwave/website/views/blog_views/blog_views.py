@@ -119,9 +119,12 @@ class BlogCreateView(View):
         title = request.POST['title'].strip()
         content = request.POST['content'].strip()
         image = request.FILES.get('image')
-        tags = request.POST['tags']
-        tag_list = tags.split(',')
-        tag_list = [i.strip() for i in tag_list]
+        tags = request.POST['tags'].strip()
+        if tags:
+            tag_list = tags.split(',')
+            tag_list = [i.strip() for i in tag_list]
+        else:
+            tag_list = []
 
         try:
             with transaction.atomic():
@@ -220,9 +223,12 @@ class BlogEditView(View):
         title = request.POST['title'].strip()
         content = request.POST['content'].strip()
         image = request.FILES.get('image')
-        tags = request.POST['tags']
-        tag_list = tags.split(',')
-        tag_list = [i.strip() for i in tag_list]
+        tags = request.POST['tags'].strip()
+        if tags:
+            tag_list = tags.split(',')
+            tag_list = [i.strip() for i in tag_list]
+        else:
+            tag_list = []
 
         tag_id_list = list(BlogTag.objects.filter(blog=blog).values_list('pk', flat=True))
         try:
