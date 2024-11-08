@@ -137,6 +137,7 @@ class SignupView(View):
                 current_site = get_current_site(request) 
                 message = render_to_string('authentication/activation_email.html', {
                     'user': user,
+                    'protocol' : request.scheme,
                     'domain': current_site.domain,
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'token': account_activation_token.make_token(user),
