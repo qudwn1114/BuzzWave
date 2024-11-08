@@ -134,17 +134,16 @@ class SignupView(View):
                 user.profile.email_verified = False
                 user.save()
 
-            current_site = get_current_site(request) 
-            message = render_to_string('authentication/activation_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            mail_title = "[D'Nova] Activate your account"
-            sendEmail = EmailMessage(mail_title, message, f"D'Nova <{settings.EMAIL_HOST_USER}>", to=[email])
-            sendEmail.send()
-                
+                current_site = get_current_site(request) 
+                message = render_to_string('authentication/activation_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': account_activation_token.make_token(user),
+                })
+                mail_title = "[D'Nova] Activate your account"
+                sendEmail = EmailMessage(mail_title, message, f"D'Nova <{settings.EMAIL_HOST_USER}>", to=[email])
+                sendEmail.send()
         except Exception as e:
             print(e)
             return JsonResponse({"message": "Sign up error occurred."}, status=400)
