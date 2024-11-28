@@ -53,6 +53,14 @@
     <!-- Main stylesheet and color file-->
     <link href="{% static 'assets/css/style.css' %}?v=20240719" rel="stylesheet">
     <link id="color-scheme" href="{% static 'assets/css/colors/default.css' %}" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D2S6KD6CFZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-D2S6KD6CFZ');
+    </script>
     {% block stylesheets %}{% endblock stylesheets %}
   </head>
 
