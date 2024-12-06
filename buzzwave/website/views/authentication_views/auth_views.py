@@ -216,6 +216,9 @@ def contact(request: HttpRequest):
     email = request.POST['email']
     phone = request.POST['phone']
     message = request.POST['message']
+    company = request.POST['company']
+    job = request.POST['job']
+
     to_email = 'dnova@d-nova.com'
 
     try:
@@ -223,6 +226,8 @@ def contact(request: HttpRequest):
             'name' : name,
             'email' : email,
             'phone' : phone,
+            'company' : company,
+            'job' : job,
             'message' : message
         })
 

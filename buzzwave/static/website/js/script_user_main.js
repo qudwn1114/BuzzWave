@@ -3,6 +3,8 @@ const input_name = document.getElementById('name');
 const input_email = document.getElementById('email');
 const input_phone = document.getElementById('phone');
 const input_message = document.getElementById('message');
+const input_company = document.getElementById('company');
+const input_job = document.getElementById('job');
 
 const error_name = document.getElementById('name-error');
 const error_email = document.getElementById('email-error');
@@ -36,6 +38,8 @@ btn_submit.addEventListener("click", async() => {
     input_email.disabled = true;
     input_phone.disabled = true;
     input_message.disabled = true;
+    input_company.disabled = true;
+    input_job.disabled = true;
     btn_submit.disabled = true;
     btn_submit.innerHTML='<i class="fa fa-spinner" aria-hidden="true"></i> Loading...';
 
@@ -58,6 +62,8 @@ btn_submit.addEventListener("click", async() => {
         input_email.disabled = false;
         input_phone.disabled = false;
         input_message.disabled = false;
+        input_company.disabled = false;
+        input_job.disabled = false;
         btn_submit.disabled = false;
         btn_submit.innerHTML='Send Message';
         return false;
