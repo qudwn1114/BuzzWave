@@ -1,24 +1,31 @@
-<div class="pagination font-alt">
+<div class="pagination">
     {% if page_obj.has_previous %}
-        <a href="javascript:;" onclick="page('{{ page_obj.previous_page_number }}')"><i class="fa fa-angle-left"></i></a>
+        <button class="prev" onclick="page('{{ page_obj.previous_page_number }}')">&laquo; 이전</button>
     {% else %}
-        <a href="javascript:;"><i class="fa fa-angle-left"></i></a>
+        <button class="prev" disabled>&laquo; 이전</button>
     {% endif %}
+    <ul>
     {% for page_number in pagelist %}
         {% if page_number == page_obj.number %}
-            <a class="active" href="javascript:;">{{ page_number }}</a>
+        <li class="active">
+            <a href="javascript:;">{{ page_number }}</a>
+        </li>
         {% else %}
             {% if page_number == page_obj.paginator.ELLIPSIS %}
+            <li>
                 <a href="javascript:;">{{ page_number }}</a>
+            </li>
             {% else %}
+            <li>
                 <a href="javascript:;" onclick="page('{{page_number}}')">{{ page_number }}</a>
+            </li>
             {% endif %}
-
         {% endif %}
     {% endfor %}
+    </ul>
     {% if page_obj.has_next %}
-        <a href="javascript:;" onclick="page('{{ page_obj.next_page_number }}')"><i class="fa fa-angle-right"></i></a>
+        <button class="next" onclick="page('{{ page_obj.next_page_number }}')">다음  &raquo;</button>
     {% else %}
-        <a href="javascript:;"><i class="fa fa-angle-right"></i></a>
+        <button class="next" disabled>다음  &raquo;</button>
     {% endif %}
 </div>

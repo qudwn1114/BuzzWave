@@ -49,12 +49,6 @@ class BlogView(View):
             username=Case(
                 When(user=None, then=V('None')),
                 default=F('user__username'), output_field=CharField()
-            ),
-            createdAt=Func(
-                F('created_at'),
-                V('%y.%m.%d'),
-                function='DATE_FORMAT',
-                output_field=CharField()
             )
         ).values(
             'id',
@@ -62,7 +56,7 @@ class BlogView(View):
             'imageUrl',
             'username',
             'content',
-            'createdAt'
+            'created_at'
         ).order_by('-id')
 
         if search:

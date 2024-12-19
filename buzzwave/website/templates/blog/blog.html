@@ -2,78 +2,90 @@
 {% load static %}
 {% load humanize %}
 
+{% block title %}
+  <title>D'Nova | Blog</title>
+{% endblock %}
+
 {% block stylesheets %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}" />
 {% endblock stylesheets %}
 
 
 {% block content %}
-<div class="main">
-    <section class="module">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-4 col-md-2 sidebar">
-              <div class="widget">
-                <form role="form">
-                  <div class="search-box">
-                    <input class="form-control" type="text" name="search" placeholder="Search..." value="{{search}}"/>
-                    <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-                  </div>
-                </form>
-              </div>
-              <div class="widget">
-                <h5 class="widget-title font-alt">Tags</h5>
-                <ul class="icon-list">
-                  <li><a {% if not tag %}class="active"{% endif %} href="{% url 'website:blog'%}">전체보기  ({{blog_total_count}})</a></li>
-                  {% for i in blog_tag_list %}
-                  <li><a {% if i.name == tag %}class="active"{% endif %}href="{% url 'website:blog'%}?tag={{i.name}}">{{i.name}}  ({{i.tag_count}})</a></li>
-                  {% endfor %}
-                </ul>
-              </div>
-            </div>
-            <div class="col-sm-8 col-sm-offset-1">
-              {% if search %}
-                <h4 class="font-alt" style="margin-top: 0;">총 <b>{{search_count|intcomma}}개</b>의 포스트를 찾았습니다.</h4>
-              {% endif %}
-              {% for i in page_obj %}
-              <div class="post">
-                {% if i.imageUrl %}
-                <div class="post-thumbnail">
-                  <a href="{% url 'website:blog_detail' i.id %}"><img src="{{i.imageUrl}}" alt="Blog-post Thumbnail"/></a>
-                </div>
-                {% endif %}
-                <div class="post-header font-alt">
-                  <h2 class="post-title"><a href="{% url 'website:blog_detail' i.id %}">{{i.title}}</a></h2>
-                  <div class="post-meta">By&nbsp;<a href="javascript:;">{{i.username}}</a>| {{i.createdAt}} |
-                  </div>
-                </div>
-                <div class="post-entry">
-                  {{i.content|truncatechars_html:100|safe}}    
-                </div>
-                <div class="post-more"><a class="more-link" href="{% url 'website:blog_detail' i.id %}">Read more</a></div>
-                {% if i.tags %}
-                <div class="tags font-serif mt-10">
-                  {% for tag in i.tags %}
-                    <a href="{% url 'website:blog'%}?tag={{tag}}" rel="tag">{{tag}}</a>
-                  {% endfor %}
-                </div>
-                {% endif %}
-              </div>
-              {% endfor %}
-
-              {% include 'pagination.html' %}
-              {% if user.is_superuser %}
-              <div>
-                <a class="btn btn-border-d btn-round" href="{% url 'website:blog_create' %}">NEW POST</a>
-              </div>
-              {% endif %}
-            </div>
+<div class="blog">
+  <div class="container">
+      <div class="search_inner">
+        <form method="get">
+          <div class="search">
+              <img
+                  src="{% static 'images/icons/icon_search.svg' %}"
+                  alt="검색"
+              />
+              <input
+                  type="text"
+                  name="search"
+                  placeholder="검색어를 입력하세요"
+                  value="{{search}}"
+              />
           </div>
-        </div>
-      </section>
-
-    {% include 'includes/website/footer.html' %}
+        </form>
+      </div>
+  </div>
+  <div class="blog_container container">
+      <aside class="blog_aside">
+          <div class="s-box">
+              <span>태그 목록</span>
+          </div>
+          <nav class="blog_nav">
+              <ul>
+                  {% if user.is_superuser %}
+                    <li><a href="{% url 'website:blog_create' %}"><b>*** 글 작성하기 ***</b></a></li>
+                  {% endif %}
+                  <li {% if not tag %}class="active"{% endif %} ><a href="{% url 'website:blog'%}">전체보기  ({{blog_total_count}})</a></li>
+                  {% for i in blog_tag_list %}
+                  <li {% if i.name == tag %}class="active"{% endif %}><a href="{% url 'website:blog'%}?tag={{i.name}}">{{i.name}}  ({{i.tag_count}})</a></li>
+                  {% endfor %}
+              </ul>
+          </nav>
+      </aside>
+      <article class="blog-list_container">
+          {% if search %}
+            <span style="font-size: 1.8rem;">총 <strong>{{search_count|intcomma}}개</strong>의 포스트를 찾았습니다.</span>
+          {% endif %}
+          <ul class="blog-list">
+            {% for i in page_obj %}
+              <li>
+                  <a href="{% url 'website:blog_detail' i.id %}">
+                    {% if i.imageUrl %}
+                      <img src="{{i.imageUrl}}" alt="Blog-post Thumbnail"/>
+                    {% else %}
+                      <img
+                          src="{% static 'images/dummy/rec.png' %}"
+                          alt="더미이미지"
+                      />
+                    {% endif %}
+                  </a>
+                  <div class="blog-info">
+                      <a href="{% url 'website:blog_detail' i.id %}">{{i.title}}</a>
+                      <p>{{i.content|striptags|truncatechars:250|safe}}</p>
+                  </div>
+                  <div class="blog-detail">
+                      <span class="date">{{ i.created_at|date:"Y년 m월 d일" }}</span>
+                  </div>
+                  {% if i.tags %}
+                  <div class="tags font-serif">
+                    {% for tag in i.tags %}
+                      <a href="{% url 'website:blog'%}?tag={{tag}}" rel="tag">{{tag}}</a>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+          {% include 'pagination.html' %}
+      </article>
+  </div>
 </div>
-
 {% endblock %}
 
 {% block javascripts %}

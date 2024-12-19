@@ -1,72 +1,89 @@
 {% extends "layouts/website_base.html" %}
 {% load static %}
+{% load humanize %}
+
+{% block title %}
+  <title>D'Nova | {{blog.title}}</title>
+{% endblock %}
 
 {% block stylesheets %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}" />
 {% endblock stylesheets %}
 
 
 {% block content %}
-<div class="main">
-    <section class="module">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-4 col-md-2 sidebar">
-              <div class="widget">
-                <form role="form">
-                  <div class="search-box">
-                    <input class="form-control" type="text" name="search" placeholder="Search..." value="{{search}}"/>
-                    <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
-                  </div>
-                </form>
-              </div>
-              <div class="widget">
-                <h5 class="widget-title font-alt">Tags</h5>
-                <ul class="icon-list">
-                  <li><a href="{% url 'website:blog'%}">전체보기  ({{blog_total_count}})</a></li>
-                  {% for i in blog_tag_list %}
-                  <li><a href="{% url 'website:blog'%}?tag={{i.name}}">{{i.name}}  ({{i.tag_count}})</a></li>
-                  {% endfor %}
-                </ul>
-              </div>
-            </div>
-            <div class="col-sm-8 col-sm-offset-1">
-   
-              <div class="post">
-                {% if blog.image %}
-                <div class="post-thumbnail">
-                  <a href="#"><img src="{{blog.image.url}}" alt="Blog-post Thumbnail"/></a>
-                </div>
-                {% endif %}
-                <div class="post-header font-alt">
-                  <h2 class="post-title"><a href="javascript:;">{{blog.title}}</a></h2>
-                  <div class="post-meta">By&nbsp;<a href="javascript:;">{{blog.user}}</a>| {{blog.created_at|date:"y.m.d"}} |
-                  </div>
-                </div>
-                <div class="post-entry">
-                  {{blog.content|safe}}    
-                </div>
-                {% if blog.blog_tag.all %}
-                <div class="tags font-serif mt-10">
-                  {% for i in blog.blog_tag.all %}
-                    <a href="{% url 'website:blog'%}?tag={{i.name}}" rel="tag">{{i.tag.name}}</a>
-                  {% endfor %}
-                </div>
-                {% endif %}
-              </div>
-              <div>
-                {% if user == blog.user %}
-                  <a class="btn btn-border-d btn-round" href="{% url 'website:blog_edit' blog.pk %}">Edit POST</a>
-                  <button class="btn btn-b btn-round" type="button" onclick="deletePost(this)">Delete POST</button>
-                {% endif %}
-              </div>
-            </div>
+<div class="blog">
+  <div class="container">
+      <div class="search_inner">
+        <form method="get">
+          <div class="search">
+              <img
+                  src="{% static 'images/icons/icon_search.svg' %}"
+                  alt="검색"
+              />
+              <input
+                  type="text"
+                  name="search"
+                  placeholder="검색어를 입력하세요"
+                  value="{{search}}"
+              />
           </div>
-        </div>
-      </section>
-
-    {% include 'includes/website/footer.html' %}
+        </form>
+      </div>
+  </div>
+  <div class="blog_container container">
+      <aside class="blog_aside">
+          <div class="s-box">
+              <span>태그 목록</span>
+          </div>
+          <nav class="blog_nav">
+              <ul>
+                  {% if user.is_superuser %}
+                    <li><a href="{% url 'website:blog_create' %}"><b>*** 글 작성하기 ***</b></a></li>
+                  {% endif %}
+                  <li {% if not tag %}class="active"{% endif %} ><a href="{% url 'website:blog'%}">전체보기  ({{blog_total_count}})</a></li>
+                  {% for i in blog_tag_list %}
+                  <li {% if i.name == tag %}class="active"{% endif %}><a href="{% url 'website:blog'%}?tag={{i.name}}">{{i.name}}  ({{i.tag_count}})</a></li>
+                  {% endfor %}
+              </ul>
+          </nav>
+      </aside>
+      <article class="blog-list_container">
+          <ul class="blog-list">
+              <li>
+                    {% if blog.image %}
+                      <img src="{{blog.image.url}}" alt="Blog-post Thumbnail"/>
+                    {% else %}
+                      <img
+                          src="{% static 'images/dummy/rec.png' %}"
+                          alt="더미이미지"
+                      />
+                    {% endif %}
+                  <div class="blog-info">
+                      <a href="javascript:;">{{blog.title}}</a>
+                      <div class="blog-detail">
+                        <span class="date">{{ blog.created_at|date:"Y년 m월 d일" }}</span>
+                    </div>
+                      <p>
+                        {{blog.content|safe}}
+                      </p> 
+                  </div>
+                  {% if blog.blog_tag.all %}
+                  <div class="tags font-serif">
+                    {% for i in blog.blog_tag.all %}
+                      <a href="{% url 'website:blog'%}?tag={{i.name}}" rel="tag">{{i.tag.name}}</a>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                  {% if user == blog.user %}
+                    <a class="btn btn-border-d btn-round" href="{% url 'website:blog_edit' blog.pk %}">Edit POST</a>
+                    <button class="btn btn-b btn-round" type="button" onclick="deletePost(this)">Delete POST</button>
+                  {% endif %}
+              </li>
+          </ul>
+      </article>
+  </div>
 </div>
-
 {% endblock %}
 
 {% block javascripts %}
