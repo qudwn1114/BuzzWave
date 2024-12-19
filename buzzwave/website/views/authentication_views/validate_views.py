@@ -16,13 +16,13 @@ def check_email(request: HttpRequest):
     try:
         validate_email(email)
     except ValidationError:
-        return JsonResponse({"message": "Invalid email format."},status=400)
+        return JsonResponse({"message": "잘못된 이메일 형식입니다."},status=400)
     try:
         User.objects.get(email=email)
-        return JsonResponse({"message": "This email has already been signed up."},
+        return JsonResponse({"message": "이미 가입된 이메일 입니다."},
         status=400)
     except:
-        return JsonResponse({"message": "Available Email.", "email":email},status=200)
+        return JsonResponse({"message": "사용가능한 이메일 입니다.", "email":email},status=200)
     
 @require_http_methods(["POST"])
 def check_username(request: HttpRequest):
@@ -31,12 +31,12 @@ def check_username(request: HttpRequest):
     '''
     username = request.POST['username'].strip()
     if not validate_username(username):
-        return JsonResponse({"message": "Invalid username."},status=400)
+        return JsonResponse({"message": "유효하지 않은 아이디 형식입니다."},status=400)
     try:
         User.objects.get(username=username)
-        return JsonResponse({"message": "This username has already been signed up."},status=400)
+        return JsonResponse({"message": "이미 가입된 아이디 입니다."},status=400)
     except:
-        return JsonResponse({"message": "Available username", "username":username},status=200)
+        return JsonResponse({"message": "사용가능한 아이디 입니다.", "username":username},status=200)
     
 @require_http_methods(["POST"])
 def check_birth(request: HttpRequest):
@@ -45,8 +45,8 @@ def check_birth(request: HttpRequest):
     '''
     birth = request.POST['birth']
     if not validate_birth(birth):
-        return JsonResponse({"message": "Invalid birth."},status=400)
-    return JsonResponse({"message": "Available birth", "birth":birth},status=200)
+        return JsonResponse({"message": "잘못된 날짜 형식 입니다. ex) 19900101"},status=400)
+    return JsonResponse({"message": "사용가능한 날짜 입니다.", "birth":birth},status=200)
 
 
 def validate_username(username):
@@ -54,7 +54,7 @@ def validate_username(username):
         아이디 유효성 체크
     '''
     try:
-        RegexValidator(regex=r'^[a-zA-z0-9]{6,20}$')(username)
+        RegexValidator(regex=r'^[a-z0-9]{6,20}$')(username)
     except:
         return False
 

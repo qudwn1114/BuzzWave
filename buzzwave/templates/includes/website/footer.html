@@ -1,51 +1,23 @@
 {% load static %}
-<div class="module-small bg-dark">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-8">
-        <div class="widget">
-          <h5 class="widget-title font-alt">About D'Nova</h5>
-          <p>Grow your digital marketing insights.</p>
-          <p>Phone: +1 234 567 89 10</p>
-          <p>Email:<a href="mailto:dnova@d-nova.com">dnova@d-nova.com</a></p>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="widget">
-          <h5 class="widget-title font-alt">Recent Posts</h5>
-          <ul class="widget-posts">
-            {% for i in recent_post %}
-            <li class="clearfix">
-              <div class="widget-posts-image">
-                {% if i.imageUrl %}
-                  <a href="{% url 'website:blog_detail' i.id %}"><img src="{{i.imageUrl}}" alt="Post Thumbnail"/></a>
-                {% else %}
-                  <a href="{% url 'website:blog_detail' i.id %}"><img src="{% static 'assets/images/rp-1.jpg' %}" alt="Post Thumbnail"/></a>
-                {% endif %}
-              </div>
-              <div class="widget-posts-body">
-                <div class="widget-posts-title"><a href="{% url 'website:blog_detail' i.id %}">{{i.title}}</a></div>
-                <div class="widget-posts-meta">{{i.createdAt}}</div>
-              </div>
-            </li>
-            {% endfor %}
+
+<footer class="footer">
+  <div class="footer_container container">
+      <div class="footer_inner">
+          <ul>
+              <li>상호명: D'Nova | 대표: 이현준</li>
+              <li>
+                  연락처: 010 8967 1353 | 이메일:
+                  <a href="mailto:dnova@d-nova.com"
+                      >dnova@d-nova.com</a
+                  >
+              </li>
+              <li>
+                  주소: 서울 | 사업자등록번호: 123-45-67890 |
+                  통신판매: 1234-서울-1234 | 호스팅제공자: D'Nova
+              </li>
+              <li></li>
           </ul>
-        </div>
+          <p>© 2024 D'Nova, All Rights Reserved</p>
       </div>
-    </div>
   </div>
-</div>
-<hr class="divider-d">
-<footer class="footer bg-dark">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <p class="copyright font-alt">&copy; 2024&nbsp;<a href="{% url 'website:home' }">D'Nova</a>, All Rights Reserved</p>
-        </div>
-        <div class="col-sm-6">
-          <div class="footer-social-links"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-dribbble"></i></a><a href="#"><i class="fa fa-skype"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
 </footer>

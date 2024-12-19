@@ -1,4 +1,82 @@
-const btn_submit = document.getElementById("cfsubmit");
+// 메인 Value 섹션 슬라이드
+const swiper = new Swiper(".serviceSwiper", {
+    effect: "fade",
+    centeredSlides: true,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+});
+
+// 메인 Price 섹션 금액
+const priceElements = document.querySelectorAll(".price");
+
+setDefaultClass();
+
+priceElements.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+        priceElements.forEach((el) => el.classList.remove("default"));
+    });
+
+    item.addEventListener("mouseleave", () => {
+        setDefaultClass();
+    });
+});
+
+function setDefaultClass() {
+    let hasDefault = false;
+
+    priceElements.forEach((el) => {
+        if (el.dataset.default) {
+            el.classList.add("default");
+            hasDefault = true;
+        } else {
+            el.classList.remove("default");
+        }
+    });
+
+    if (!hasDefault && priceElements.length > 0) {
+        priceElements[0].classList.add("default");
+    }
+}
+// 서비스 모달
+const startBtn = document.querySelectorAll(".start");
+const serviceModal = document.querySelector(".service_modal");
+const serviceModalInner = document.querySelector(".service_modal_inner");
+const contactBtn = document.querySelector(".btn_contact");
+
+window.addEventListener("click", (e) => {
+    if (e.target === serviceModal) {
+        serviceModal.classList.remove("show");
+    }
+});
+
+startBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        serviceModal.classList.add("show");
+    });
+});
+
+contactBtn.addEventListener("click", () => {
+    const mainContact = document.querySelector(".main_contact");
+    serviceModal.classList.remove("show");
+
+    window.scrollTo({
+        top: mainContact.offsetTop - header.clientHeight,
+        behavior: "smooth",
+    });
+});
+
+
+const btn_submit = document.getElementById("btn_submit");
 const input_name = document.getElementById('name');
 const input_email = document.getElementById('email');
 const input_phone = document.getElementById('phone');
@@ -12,22 +90,10 @@ const error_phone = document.getElementById('phone-error');
 const error_message = document.getElementById('message-error');
 
 const semail = document.getElementById("semail");
-const btn_subscribe = document.getElementById('subscription-form-submit');
+const btn_subscribe = document.getElementById('btn_subscription');
 
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-window.onload = function(){
-    let hash = window.location.hash;
-    let duration = 1000;
-    if (hash !== null && hash !== '') { // it was indeed ending in -st
-        if($(hash).length == 0){
-            return;
-        }
-        $('html, body').animate({
-            scrollTop: $(hash).offset().top - 50
-        }, duration);
-    }
-}
+const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 
 btn_submit.addEventListener("click", async() => {
     if(!validation()){
@@ -65,7 +131,7 @@ btn_submit.addEventListener("click", async() => {
         input_company.disabled = false;
         input_job.disabled = false;
         btn_submit.disabled = false;
-        btn_submit.innerHTML='Send Message';
+        btn_submit.innerHTML='문의하기';
         return false;
     }
 });
@@ -83,7 +149,7 @@ btn_subscribe.addEventListener("click", () => {
         return;
     }
     if(!reg_email.test(semail.value)){
-        alert('Invalid email format.')
+        alert('잘못된 이메일 형식입니다.')
         return;
     }
     btn_subscribe.disabled=true;
@@ -98,18 +164,17 @@ btn_subscribe.addEventListener("click", () => {
             alert(result.message);
             semail.value = '';
             btn_subscribe.disabled=false;
-            btn_subscribe.innerHTML='Submit';
+            btn_subscribe.innerHTML='구독하기';
         },
         error: function(error) {
             alert(error.responseJSON.message);
             btn_subscribe.disabled=false;
-            btn_subscribe.innerHTML='Submit';
+            btn_subscribe.innerHTML='구독하기';
         },
     });
     
 });
 
-const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 function validation(){
     error_name.innerText='';
     error_email.innerText='';
@@ -119,23 +184,23 @@ function validation(){
     let tf = true;
 
     if(input_name.value==''){
-        error_name.innerText = 'Please enter your name.';
+        error_name.innerText = '이름을 입력해주세요.';
         tf = false;        
     }
     if(input_email.value==''){
-        error_email.innerText = 'Please enter your email.';
+        error_email.innerText = '이메일을 입력해주세요.';
         tf = false;
     }
     if(!reg_email.test(input_email.value)){
-        error_email.innerText = 'Invalid email format.';
+        error_email.innerText = '유효하지 않은 이메일 형식입니다.';
         tf = false;
     }         
     if(input_phone.value==''){
-        error_phone.innerText = 'Please enter your phone.';
+        error_phone.innerText = '휴대폰번호를 입력해주세요.';
         tf = false;  
     }
     if(input_message.value==''){
-        error_message.innerText = 'Please enter your message.';
+        error_message.innerText = '문의내용을 입력해주세요.';
         tf = false;
     }
     return tf;

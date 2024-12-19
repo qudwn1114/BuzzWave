@@ -21,7 +21,7 @@ const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
 function checkEmail() {
     message_email.innerText = ''
-    message_email.className = 'text-danger';
+    message_email.className = 'error';
     email.value = email.value.trim();
     const data = {
         'email': email.value
@@ -36,7 +36,7 @@ function checkEmail() {
         datatype: "JSON",
         success: function (data) {
             email.value = data.email;
-            message_email.className = 'text-success';
+            message_email.className = 'success';
             message_email.innerText = data.message;
         },
         error: function (error) {
@@ -48,7 +48,7 @@ function checkEmail() {
 
 function checkUsername() {
     message_username.innerText = ''
-    message_username.className = 'text-danger';
+    message_username.className = 'error';
     username.value = username.value.trim();
     const data = {
         'username': username.value
@@ -63,7 +63,7 @@ function checkUsername() {
         datatype: "JSON",
         success: function (data) {
             username.value = data.username;
-            message_username.className = 'text-success';
+            message_username.className = 'success';
             message_username.innerText = data.message;
         },
         error: function (error) {
@@ -75,7 +75,7 @@ function checkUsername() {
 
 function checkBirth() {
     message_birth.innerText = ''
-    message_birth.className = 'text-danger';
+    message_birth.className = 'error';
     const data = {
         'birth': birth.value
     }
@@ -99,23 +99,28 @@ function checkBirth() {
 
 function checkPassword(){
     message_password.innerText = ''
-    message_password.className = 'text-danger';
-    if(password1.value != '' && password2.value == ''){
+    message_password.className = 'error';
+    if(password1.value == '' && password2.value == ''){
+        message_password.innerText = '비밀번호를 입력해주세요.';
+        password1.focus();
+        return;
+    }
+    else if(password1.value != '' && password2.value == ''){
         if (!regPassword(password1.value)) {
-            message_password.innerText = 'Minimum 8 characters Maximum 16 characters, at least one letter and one number.';
+            message_password.innerText = '비밀번호는 8-16자 영문, 숫자를 포함해야합니다.';
             password1.focus();
         }
         return;
     }
     else if(password1.value != '' && password2.value != ''){
         if (password1.value != password2.value) {
-            message_password.innerText = 'Passwords do not match.';
+            message_password.innerText = '비밀번호가 일치하지 않습니다.';
             password1.focus();
             return
         }
         else{
             if (!regPassword(password1.value)) {
-                message_password.innerText = 'Minimum 8 characters Maximum 16 characters, at least one letter and one number.';
+                message_password.innerText = '비밀번호는 8-16자 영문, 숫자를 포함해야합니다.';
                 password1.focus();
                 return
             }
@@ -123,18 +128,18 @@ function checkPassword(){
     }
     else if(password1.value == '' && password2.value != ''){
         if (!regPassword(password2.value)) {
-            message_password.innerText = 'Minimum 8 characters Maximum 16 characters, at least one letter and one number.';
+            message_password.innerText = '비밀번호는 8-16자 영문, 숫자를 포함해야합니다.';
             password2.focus();
             return;
         }
         else{
-            message_password.innerText = 'Please enter your password.';
+            message_password.innerText = '비밀번호를 입력해주세요.';
             password1.focus();
             return;
         }
     }
-    message_password.className = 'text-success';
-    message_password.innerText = '✔';
+    message_password.className = 'success';
+    message_password.innerText = '사용가능한 비밀번호입니다.';
     return;
 }
 
@@ -178,7 +183,7 @@ btn_submit.addEventListener("click", () => {
             birth.disabled = false;
             company.disabled = false;
             btn_submit.disabled = false;
-            btn_submit.innerHTML = 'Signup';
+            btn_submit.innerHTML = '회원가입';
         },
     });
 
@@ -189,47 +194,47 @@ btn_submit.addEventListener("click", () => {
 //유효성 체크 함수
 function validation() {
     if (membername.value == "") {
-        message_membername.innerText = 'Please enter your name.';
+        message_membername.innerText = '이름을 입력해주세요.';
         membername.focus();
         return false;
     }
     if (email.value == "") {
-        message_email.innerText = 'Please enter your email.';
+        message_email.innerText = '이메일을 입력해주세요.';
         email.focus();
         return false;
     }
     if (username.value == "") {
-        message_username.innerText = 'Please enter your username.';
+        message_username.innerText = '아이디를 입력해주세요.';
         username.focus();
         return false;
     }
     if (birth.value == "") {
-        message_birth.innerText = 'Please enter your birth.';
+        message_birth.innerText = '생년월일을 입력해주세요.';
         birth.focus();
         return false;
     }
     if (phone.value == "") {
-        message_phone.innerText = 'Please enter your mobile number.';
+        message_phone.innerText = '휴대폰번호를 입력해주세요.';
         phone.focus();
         return false;
     }
     if (password1.value == "") {
-        message_password.innerText = 'Please enter your password.';
+        message_password.innerText = '비밀번호를 입력해주세요.';
         password1.focus();
         return false;
     }
     if (password2.value == "") {
-        message_password.innerText = 'Please re enter your password.';
+        message_password.innerText = '비밀번호를 재 입력해주세요.';
         password2.focus();
         return false;
     }
     if (password1.value != password2.value) {
-        message_password.innerText = 'Passwords do not match.';
+        message_password.innerText = '비밀번호가 일치하지 않습니다.';
         password1.focus();
         return false;
     }
     if (!regPassword(password1.value)) {
-        message_password.innerText = 'Minimum 8 characters Maximum 16 characters, at least one letter and one number.';
+        message_password.innerText = '비밀번호는 8-16자 영문, 숫자를 포함해야합니다.';
         password1.focus();
         return false;
     }

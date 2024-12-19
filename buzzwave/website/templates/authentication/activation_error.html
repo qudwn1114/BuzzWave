@@ -1,28 +1,30 @@
 {% extends "layouts/website_base.html" %}
 {% load static %}
 
+{% block title %}
+  <title>D'Nova | 404</title>
+{% endblock %}
+
 {% block stylesheets %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
 {% endblock stylesheets %}
 
-
 {% block content %}
-<div class="main">
-    <section class="module">
-        <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <h2 class="module-title font-alt">Token expired.</h2>
-                <div class="module-subtitle font-serif">
-                    Your account activation token is no longer valid. This can happen if you clicked your activation link after creating your account, your activation link expired, or the URL is incorrect.
-                    <hr>
-                    <a class="btn btn-d btn-round" href="{% url 'website:home' %}">Home</a>
-                </div>
+
+<section class="login_section">
+    <div class="login_container container">
+        <form id="loginForm">
+            <h2>토큰이 만료되었습니다</h2>
+
+            <div class="not_">                
+                <span>계정 활성화 토큰이 더 이상 유효하지 않습니다. 다음과 같은 경우에 발생할 수 있습니다. 계정을 생성한 후 활성화 링크를 클릭했을 때, 활성화 링크가 만료된 경우, URL이 잘못된 경우</span>
             </div>
-        </div>
-        </div>
-    </section>
-    {% include 'includes/website/footer.html' %}
-</div>
+            <div class="find">
+            </div>
+            <button type="button" onclick="location.href=`{% url 'website:home' %}`">Home</button>
+        </form>
+    </div>
+  </section>
 
 {% endblock %}
 

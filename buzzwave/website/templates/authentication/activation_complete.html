@@ -1,28 +1,33 @@
 {% extends "layouts/website_base.html" %}
 {% load static %}
 
+{% block title %}
+  <title>D'Nova | 이메일 인증완료</title>
+{% endblock %}
+
 {% block stylesheets %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
 {% endblock stylesheets %}
 
-
 {% block content %}
-<div class="main">
-    <section class="module">
-        <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <h2 class="module-title font-alt">Email verified</h2>
-                <div class="module-subtitle font-serif">
-                    Your email address was successfully verified.
-                    <hr>
-                    <a class="btn btn-d btn-round" href="{% url 'website:home' %}">Home</a>
-                </div>
+
+<section class="login_section">
+    <div class="login_container container">
+        <form id="loginForm">
+            <h2>이메일 인증완료</h2>
+
+            <div class="not_">                
+                <span>이메일 주소가 성공적으로 확인되었습니다.</span>
+                <a href="{% url 'website:login' %}">
+                    로그인 하러가기? <span>로그인</span>
+                </a>
             </div>
-        </div>
-        </div>
-    </section>
-    {% include 'includes/website/footer.html' %}
-</div>
+            <div class="find">
+            </div>
+            <button type="button" onclick="location.href=`{% url 'website:home' %}`">Home</button>
+        </form>
+    </div>
+  </section>
 
 {% endblock %}
 

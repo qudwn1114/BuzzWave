@@ -1,44 +1,63 @@
 {% extends "layouts/website_base.html" %}
 {% load static %}
 
+{% block title %}
+  <title>D'Nova | 로그인</title>
+{% endblock %}
+
 {% block stylesheets %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
 {% endblock stylesheets %}
 
 
 {% block content %}
-<div class="main">
-    <section class="module">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3 mb-sm-40">
-            <h4 class="font-alt text-center">Signin</h4>
-            <hr class="divider-w mb-10">
-            <form class="form" id="loginForm">
-              <div class="form-group">
-                <input class="form-control" id="username" type="text" name="username" placeholder="Username" onkeyup="enterkey(this)"/>
+
+<section class="login_section">
+  <div class="login_container container">
+      <form id="loginForm">
+          <h2>로그인</h2>
+          <div class="i-box_container">
+              <div class="i-box">
+                  <label for="username">아이디</label>
+                  <input
+                      type="text"
+                      id="username"
+                      name="username"
+                      placeholder="아이디를 입력해주세요."
+                      onkeyup="enterkey(this)"
+                  />
               </div>
-              <div class="form-group">
-                <input class="form-control" id="password" type="password" name="password" placeholder="Password" onkeyup="enterkey(this)"/>
+              <div class="i-box">
+                  <label for="password">비밀번호</label>
+                  <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="비밀번호를 입력해주세요."
+                      onkeyup="enterkey(this)"
+                  />
               </div>
-              <p class="text-danger" id="login-error"></p>
-              <div class="form-group">
-                <button class="btn btn-round btn-b btn-block" type="button" id="btn-login">Signin</button>
-              </div>
-              <div class="form-group">
-                <a href="{% url 'website:password_reset' %}">Forgot Password?</a>
-                <a href="{% url 'website:signup' %}" class="pull-right">New to D'Nova?</a>
-              </div>
-            </form>
+              <p class="error" id="login-error"></p>
           </div>
-        </div>
+          <div class="find">
+              <a href="#">아이디 찾기</a>|
+              <a href="{% url 'website:password_reset' %}">비밀번호 찾기</a>
+          </div>
+          <button type="button" id="btn-login">로그인</button>
+      </form>
+      <div class="not_">
+          <span
+              >지금 가입하고 D'Nova의 혁신적인 서비스를
+              경험해보세요!</span
+          >
+          <a href="{% url 'website:signup' %}">
+              아직 회원이 아니신가요? <span>회원가입</span>
+          </a>
       </div>
-    </section>
-
-    {% include 'includes/website/footer.html' %}
-</div>
-
+  </div>
+</section>
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="{% static 'website/js/script_user_login.js' %}?v=20240426"></script>
+<script type="text/javascript" src="{% static 'website/js/script_user_login.js' %}?v=20241219"></script>
 {% endblock javascripts %}

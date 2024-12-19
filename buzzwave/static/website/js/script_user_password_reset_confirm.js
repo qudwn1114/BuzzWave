@@ -14,22 +14,22 @@ btn_submit.addEventListener("click", () =>{
 
 function validation(){
     if (new_password1.value == "") {
-        password_error.innerText = 'Please enter your password.';
+        password_error.innerText = '비밀번호를 입력해주세요.';
         new_password1.focus();
         return false;
     }
     if (new_password2.value == "") {
-        password_error.innerText = 'Please re enter your password.';
+        password_error.innerText = '비밀번호를 확인해주세요.';
         new_password2.focus();
         return false;
     }
     if (new_password1.value != new_password2.value) {
-        password_error.innerText = 'Passwords do not match.';
+        password_error.innerText = '비밀번호가 일치하지 않습니다.';
         new_password1.focus();
         return false;
     }
     if (!regPassword(new_password1.value)) {
-        password_error.innerText = 'Minimum 8 characters Maximum 16 characters, at least one letter and one number.';
+        password_error.innerText = '비밀번호는 8-16자 영문, 숫자를 포함해야합니다.';
         new_password1.focus();
         return false;
     }

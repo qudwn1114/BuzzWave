@@ -1,74 +1,129 @@
 {% extends "layouts/website_base.html" %}
 {% load static %}
 
+{% block title %}
+  <title>D'Nova | 회원가입</title>
+{% endblock %}
+
 {% block stylesheets %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
 {% endblock stylesheets %}
 
-
+<p class="success"></p>
+<p class="error"></p>
 {% block content %}
-<div class="main">
-    <section class="module">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3 mb-sm-40">
-            <h4 class="font-alt text-center">Signup</h4>
-            <hr class="divider-w mb-10">
-            <form class="form" id="signupForm">
-              <div class="form-group">
-                <div class="form-group">
-                  <label for="membername">Name*</label>
-                  <small class="text-danger" id="message-membername"></small>
-                  <input class="form-control" id="membername" type="text" name="membername" placeholder="First and last name"/>
-                </div>
-                <div class="form-group">
-                  <label for="email">Email*</label>
-                  <small class="text-danger" id="message-email"></small>
-                  <input class="form-control" id="email" type="email" name="email" placeholder="Email" onchange="checkEmail()"/>
-                  <small>After signing up, an account activation email will be sent to your email address.</small>
-                </div>
-                <label for="username">Username*</label>
-                <small class="text-danger" id="message-username"></small>
-                <input class="form-control" id="username" type="text" name="username" placeholder="Username" onchange="checkUsername()"/>
+<section class="login_section">
+  <div class="login_container container">
+      <form id="signupForm">
+          <h2>회원가입</h2>
+          <div class="i-box_container">
+              <div class="i-box">
+                  <label for="membername">이름</label>
+                  <input
+                      type="text"
+                      id="membername"
+                      name="membername"
+                      placeholder="이름을 입력해주세요."
+                      required
+                  />
+                  <p class="error" id="message-membername"></p>
               </div>
-              <div class="form-group">
-                <label for="password">Password*</label>
-                <small class="text-danger" id="message-password"></small>
-                <input class="form-control" id="password" type="password" name="password" placeholder="At least 8 characters" onchange="checkPassword()"/>
-                <input class="form-control" id="re-password" type="password" name="re-password" placeholder="Re-enter Password" onchange="checkPassword()"/>
+              <div class="i-box">
+                  <label for="email">이메일</label>
+                  <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="이메일을 입력해주세요."
+                      required
+                      onchange="checkEmail()"
+                  />
+                  <p class="error" id="message-email"></p>
+                  <p style="padding-left: 0.5rem;">가입완료 후 계정 활성화를 위한 인증 메일이 발송됩니다.</p>
               </div>
-              <div class="form-group">
-                <label for="phone">Mobile Number*</label>
-                <small class="text-danger" id="message-phone"></small>
-                <input class="form-control" id="phone" type="text" name="phone" placeholder="Mobile Number" maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+              <div class="i-box">
+                  <label for="username">아이디</label>
+                  <input
+                      type="text"
+                      id="username"
+                      name="username"
+                      placeholder="아이디를 입력해주세요."
+                      required
+                      onchange="checkUsername()"
+                  />
+                  <p class="error" id="message-username"></p>
               </div>
-
-              <div class="form-group">
-                <label for="birth">Birth*</label>
-                <small class="text-danger" id="message-birth"></small>
-                <input class="form-control" id="birth" type="text" name="birth" placeholder="yyyymmdd" maxlength="8" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onchange="checkBirth()"/>
+              <div class="i-box">
+                  <label for="password">비밀번호</label>
+                  <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="비밀번호를 입력해주세요."
+                      required
+                      onchange="checkPassword()"
+                  />
+                  <input
+                      type="password"
+                      id="re-password"
+                      name="re-password"
+                      placeholder="비밀번호를 다시 입력해주세요."
+                      required
+                      onchange="checkPassword()"
+                  />
+                  <p class="error" id="message-password"></p>
               </div>
-              <div class="form-group">
-                <label for="company">Company</label>
-                <input class="form-control" id="company" type="text" name="company" placeholder="Company" maxlength="50"/>
+              <div class="i-box">
+                  <label for="phone">휴대폰번호</label>
+                  <input
+                      type="text"
+                      id="phone"
+                      name="phone"
+                      placeholder="휴대폰번호를 입력해주세요."
+                      required
+                      maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                  />
+                  <p class="error" id="message-phone"></p>
               </div>
-              <p class="text-danger" id="signup-error"></p>
-              <div class="form-group">
-                <button class="btn btn-round btn-b btn-block" type="button" id="btn-submit">Signup</button>
+              <div class="i-box">
+                  <label for="birth">생년월일</label>
+                  <input
+                      type="text"
+                      id="birth"
+                      name="birth"
+                      placeholder="생년월일을 입력해주세요. (ex. yyyymmdd)"
+                      required
+                      maxlength="8" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" onchange="checkBirth()"
+                  />
               </div>
-              <div class="form-group">
-                <a href="{% url 'website:login' %}">Already have an account?</a>
+              <div class="i-box">
+                  <label for="company">회사</label>
+                  <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      placeholder="회사명을 입력해주세요."
+                      required
+                      maxlength="50"
+                  />
               </div>
-            </form>
           </div>
-        </div>
+          <p class="error" id="signup-error"></p>
+          <button type="button" id="btn-submit">회원가입</button>
+      </form>
+      <div class="not_">
+          <span>
+              지금 로그인하고 D'Nova의 혁신적인 서비스를
+              경험해보세요!
+          </span>
+          <a href="{% url 'website:login' %}">
+              이미 회원이신가요? <span>로그인 하기</span>
+          </a>
       </div>
-    </section>
-
-    {% include 'includes/website/footer.html' %}
-</div>
-
+  </div>
+</section>
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="{% static 'website/js/script_user_signup.js' %}?v=20240425"></script>
+<script type="text/javascript" src="{% static 'website/js/script_user_signup.js' %}?v=20241219"></script>
 {% endblock javascripts %}

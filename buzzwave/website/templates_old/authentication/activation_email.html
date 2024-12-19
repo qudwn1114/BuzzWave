@@ -1,0 +1,10 @@
+{% autoescape off %}
+
+{{user.username}}
+
+Please click the link below to complete the D'Nova email authentication process.
+
+{{protocol}}://{{domain}}{% url 'website:activate' uidb64=uid token=token %}
+
+
+{% endautoescape %}

@@ -15,7 +15,7 @@ function resend(elem){
             location.href = data.url;
         },
         error: function (error) {
-            elem.innerHTML = 'Resend';
+            elem.innerHTML = '재전송';
             elem.disabled=false;
             alert(error.responseJSON.message);
         },

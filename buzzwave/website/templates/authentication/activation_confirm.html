@@ -1,34 +1,40 @@
 {% extends "layouts/website_base.html" %}
 {% load static %}
 
+{% block title %}
+  <title>D'Nova | 이메일 인증</title>
+{% endblock %}
+
 {% block stylesheets %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
 {% endblock stylesheets %}
 
 
 {% block content %}
-<div class="main">
-    <section class="module">
-        <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <h2 class="module-title font-alt">Verify your email address</h2>
-                <div class="module-subtitle font-serif">
-                    <b>{{username}},</b><br>
-                    An email has been sent to the email address you signed up with.<br>
-                    Click the link in the email to activate your account.<br>
-                    <hr>
-                    If you didn't receive the email? Try sending it again.<br>
-                    <button class="btn btn-d btn-round" type="button" onclick="resend(this)">Resend</button>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section>
-    {% include 'includes/website/footer.html' %}
-</div>
+<section class="login_section">
+    <div class="login_container container">
+        <form id="loginForm">
+            <h2>이메일 메일함을 확인해주세요</h2>
 
+            <div class="not_">
+                <span>
+                    <b>{{username}} 님, 안녕하세요.</b>
+                    회원가입 시 입력하신 이메일 주소로 가입확인 이메일이 발송되었습니다.
+                    이메일에 포함된 링크를 클릭하여 계정을 활성화해주세요.
+                </span>
+                
+                    <span>만약 이메일을 받지 못하셨다면? 이메일을 다시 보내보세요.</span>
+                
+            </div>
+            <div class="find">
+                
+            </div>
+            <button type="button" onclick="resend(this)">재전송</button>
+        </form>
+    </div>
+  </section>
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="{% static 'website/js/script_user_activation.js' %}"></script>
+<script type="text/javascript" src="{% static 'website/js/script_user_activation.js' %}?v=20241219"></script>
 {% endblock javascripts %}

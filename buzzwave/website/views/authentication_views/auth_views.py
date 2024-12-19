@@ -50,15 +50,15 @@ class LoginView(View):
         try:
             user = User.objects.get(username=username)
         except:
-            return JsonResponse({'message':'username or password.'}, status = 400)
+            return JsonResponse({'message':'아이디 또는 비밀번호가 일치하지 않습니다.'}, status = 400)
         if not user.check_password(raw_password=password):
-            return JsonResponse({'message':'username or password.'}, status = 400)
+            return JsonResponse({'message':'아이디 또는 비밀번호가 일치하지 않습니다.'}, status = 400)
         if user.profile.withdrawal_at:
-            return JsonResponse({'message':'withdrawal account.'}, status = 400)
+            return JsonResponse({'message':'탈퇴한 회원입니다.'}, status = 400)
         if not user.profile.email_verified:
-            return JsonResponse({'message':'please verify your email.', 'url':reverse('website:activation_confirm') + f'?username={username}'}, status = 403)
+            return JsonResponse({'message':'이메일을 확인하여 계정을 활성화 해주세요.', 'url':reverse('website:activation_confirm') + f'?username={username}'}, status = 403)
         if not user.is_active:
-            return JsonResponse({'message':'deactivated account'}, status = 400)
+            return JsonResponse({'message':'비활성화 된 회원입니다.'}, status = 400)
         login(request, user)
         if 'next' in request.GET:
             url = request.GET.get('next')
@@ -88,33 +88,29 @@ class SignupView(View):
         company = request.POST['company']
 
         if not validate_username(username):
-            return JsonResponse({
-                "message": "Invalid username."}, 
-                status=400)
+            return JsonResponse({"message": "유효하지 않은 아이디 입니다."}, status=400)
         if not validate_password(password):
-            return JsonResponse({
-                "message": "The password must be 8 to 16 characters long and contain one letter and one number."}, 
-                status=400)
+            return JsonResponse({"message": "비밀번호는 숫자와 영문자 조합으로 8~16자리를 사용해야 합니다."}, status=400)
         try:
             validate_email(email)
         except ValidationError:
-            return JsonResponse({"message": "Invalid email format."},
+            return JsonResponse({"message": "잘못된 이메일 형식입니다."},
                 status=400)
         if not validate_birth(birth):
             return JsonResponse({
-                "message": "Invalid date of birth format. ex) 19900101"},
+                "message": "잘못된 날짜 형식 입니다. ex) 19900101"},
                 status=400)
         try:
             User.objects.get(username=username)
             return JsonResponse({
-                "message": "This username has already been signed up."},
+                "message": "이미 가입된 아이디 입니다."},
                 status=400)
         except:
             pass
         try:
             User.objects.get(email=email)
             return JsonResponse({
-                "message": "This email has already been signed up."},
+                "message": "이미 가입된 이메일 입니다."},
                 status=400)
         except:
             pass
@@ -171,9 +167,9 @@ class ActivationConfirmView(View):
         try:
             user = User.objects.get(username=username)
         except:
-            return JsonResponse({"message": "Incorrect username."},status=400)
+            return JsonResponse({"message": "잘못된 아이디 입니다."},status=400)
         if not user.email:
-            return JsonResponse({"message": "Invalid Email."},status=400)
+            return JsonResponse({"message": "잘못된 이메일 입니다."},status=400)
         if not user.profile.email_verified:
             current_site = get_current_site(request) 
             message = render_to_string('authentication/activation_email.html', {
@@ -185,9 +181,9 @@ class ActivationConfirmView(View):
             mail_title = "[D'Nova] Activate your account"
             sendEmail = EmailMessage(mail_title, message, f"D'Nova <{settings.EMAIL_HOST_USER}>", to=[user.email])
             sendEmail.send()
-            return JsonResponse({"url":reverse('website:activation_confirm') + f'?username={user.username}', "message":"Email sent completed"}, status=status.HTTP_200_OK)
+            return JsonResponse({"url":reverse('website:activation_confirm') + f'?username={user.username}', "message":"이메일이 재전송 되었습니다."}, status=200)
         else:
-            return JsonResponse({"message": "This account has already been verified."}, status=400)
+            return JsonResponse({"message": "이미 이메일 인증을 완료한 회원입니다."}, status=400)
         
 def activate(request: HttpRequest, uidb64, token):
     '''
@@ -235,12 +231,13 @@ def contact(request: HttpRequest):
         sendEmail = EmailMessage(mail_title, message, f"Contact <{settings.EMAIL_HOST_USER}>", to=[to_email])
         sendEmail.send()
     except Exception as e:
+        print(e)
         return JsonResponse({
             'message' : 'Send Error'
         }, status = 400)
 
     return JsonResponse({
-        'message' : 'Your email has been sent. We will contact you as soon as possible using the contact information you provided.'
+        'message' : '이메일이 전송되었습니다.\n제공해주신 연락처를 통해 최대한 빠르게 답변드리겠습니다.'
     }, status = 200)
 
 

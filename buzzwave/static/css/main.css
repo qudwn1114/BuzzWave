@@ -1,0 +1,547 @@
+.t-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+.t-box h4 img {
+    display: block;
+    width: 10rem;
+    height: auto;
+}
+.t-box span {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--222);
+}
+.t-box p {
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--939393);
+}
+
+/* 메인 Banner 섹션 */
+.main_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 64rem;
+    background: url(../images/bg/banner_main.png) no-repeat center / cover;
+}
+.main_section_inner {
+    display: flex;
+    flex-direction: column;
+}
+.main_section_inner > h2 {
+    font-size: 3.6rem;
+    font-weight: 800;
+    color: var(--FFFFFF);
+    text-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.6);
+}
+.main_section_inner .t-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: 2rem 0 4rem;
+}
+.main_section_inner .t-box h3 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--FFFFFF);
+    text-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.6);
+}
+.main_section_inner .t-box h3 > span {
+    font-size: 3.2rem;
+    -webkit-text-stroke: 1px var(--7A7A7A);
+    color: var(--F0F0F0);
+    text-shadow: none;
+}
+.main_section_inner .t-box p {
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--EEEFF2);
+    text-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.6);
+}
+/* 메인 About 섹션 */
+.main_about {
+    background-color: var(--F7F8FB);
+}
+.main_about_container {
+    padding: 9.2rem 2rem 7.4rem;
+}
+.about_t {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    text-align: center;
+    margin-bottom: 4.4rem;
+}
+.about_t > p {
+    font-size: 1.7rem;
+    font-weight: 500;
+    line-height: 1.7;
+    color: var(--939393);
+}
+.about_g {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7rem;
+}
+.about_g::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 0.1rem;
+    background-color: var(--EAEAEA);
+}
+.about_g .group {
+    position: relative;
+    width: 24rem;
+    height: 24rem;
+    border-radius: 50%;
+    background: var(--FFFFFF);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.03);
+}
+.about_g .group.nova {
+    width: 30rem;
+    height: 30rem;
+}
+.about_g .group.member img {
+    display: block;
+    width: 5.5rem;
+    height: auto;
+}
+.about_g .group.nova img {
+    display: block;
+    width: 8rem;
+    height: auto;
+}
+.about_g .group.user img {
+    display: block;
+    width: 8.5rem;
+    height: auto;
+}
+.about_g .group span {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--222);
+}
+/* 메인 Our 섹션 */
+.main_our {
+    padding: 8.6rem 0 9rem;
+    background-color: var(--FFFFFF);
+}
+.our_container {
+    display: flex;
+    flex-direction: column;
+    gap: 8.8rem;
+}
+.our_group {
+    display: flex;
+    align-items: center;
+    gap: 5.6rem;
+}
+.our_group > img {
+    display: block;
+    width: 58rem;
+    height: 28rem;
+}
+.our_group > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2.8rem;
+}
+.our_group > div h5 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: var(--222);
+}
+.our_group > div p {
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 2;
+    color: var(--7A7A7A);
+}
+/* 메인 Value 섹션 */
+.main_value {
+    padding: 8.8rem 0 12.2rem;
+    background-color: var(--F2F3F8);
+}
+.main_value .value_container {
+    max-width: 100rem;
+    min-width: 100rem;
+}
+.serviceSwiper {
+    border-radius: 1.2rem;
+    box-shadow: 0px 0.2rem 1.4rem 0 rgba(0, 0, 0, 0.07);
+    overflow: visible;
+}
+.serviceSwiper .swiper-pagination {
+    bottom: -4.6rem;
+}
+.serviceSwiper .swiper-pagination .swiper-pagination-bullet-active {
+    background: var(--6C6C6C);
+}
+.serviceSwiper .swiper-button-prev,
+.serviceSwiper .swiper-button-next {
+    color: var(--6C6C6C);
+}
+.serviceSwiper .swiper-button-prev {
+    left: -6rem;
+}
+.serviceSwiper .swiper-button-next {
+    right: -6rem;
+}
+.main_value .t-box {
+    margin-bottom: 4rem;
+}
+.service-item {
+    border-radius: 1.2rem;
+    background-color: var(--FFFFFF);
+    padding: 6.8rem;
+}
+.service_inner {
+    display: flex;
+    flex-direction: column;
+}
+.service_inner > span {
+    width: fit-content;
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(
+        to right,
+        var(--4D4D4D) 0%,
+        var(--primary) 100%
+    );
+    color: transparent;
+    -webkit-background-clip: text;
+}
+.service_inner > h6 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: var(--222);
+    margin: 1rem 0 4.1rem;
+}
+.service_inner > p {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--7A7A7A);
+}
+/* 메인 Price 섹션 */
+.main_price {
+    padding: 9.4rem 0 9.8rem;
+    background-color: var(--FFFFFF);
+}
+.main_price .t-box {
+    gap: 0;
+}
+.main_price .t-box span {
+    margin: 2rem 0 0.5rem;
+}
+.price_inner {
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+    margin-top: 4.2rem;
+}
+.price_inner .price {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border-radius: 0.6rem;
+    border: 0.1rem solid var(--D9D9D9);
+    padding: 2.4rem;
+    overflow: hidden;
+    cursor: pointer;
+}
+.price_inner .price:hover {
+    border-color: var(--secondary);
+    border-width: 0.1rem;
+}
+.price > span {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--secondary);
+}
+.price-d {
+    margin: 2rem 0 2rem;
+}
+.price-d b {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--4D4D4D);
+}
+.price-d b span {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--7A7A7A);
+}
+.price ul {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--AAAAAA);
+}
+.price ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    user-select: none;
+}
+.price ul li img {
+    display: block;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-top: 0.3rem;
+}
+.price ul li span {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--7A7A7A);
+    word-break: keep-all;
+}
+.price ul li span > span {
+    color: var(--4D4D4D);
+    font-weight: 800;
+}
+.price ul li strong {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--222);
+}
+.price > button {
+    width: 100%;
+    height: 5rem;
+    border-radius: 0.4rem;
+    border: 0.1rem solid var(--secondary);
+    background-color: var(--FFFFFF);
+    margin-top: 4rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--secondary);
+    transition: background-color 0.3s, color 0.3s;
+}
+.price:hover > button {
+    background-color: var(--secondary);
+    color: var(--FFFFFF);
+    font-weight: 800;
+}
+.price.default {
+    border-color: var(--secondary);
+}
+.price.default > button {
+    background-color: var(--secondary);
+    color: var(--FFFFFF);
+    font-weight: 800;
+}
+/* 메인 submit 섹션 */
+.main_submit {
+    width: 100%;
+    height: 46rem;
+    background: url(../images/bg/banner_submit.png) no-repeat center / cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.main_submit .submit_inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 4rem;
+}
+.main_submit .t-box span {
+    color: var(--FFFFFF);
+    text-align: center;
+    line-height: 1.3;
+}
+.main_submit .i-box {
+    width: 40%;
+    flex-direction: row;
+    align-items: center;
+}
+.main_submit .i-box input {
+    max-width: 50rem;
+    height: 5rem;
+    font-size: 1.5rem;
+    background: var(--FFFFFF);
+}
+.main_submit .i-box > button {
+    width: 14rem;
+    height: 5rem;
+    border-radius: 0.4rem;
+    border: 0.1rem solid rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--FFFFFF);
+}
+/* 메인 contact 섹션 */
+.main_contact {
+    padding: 9.4rem 0 9.8rem;
+    border-top: 0.1rem solid var(--EAEAEA);
+    background-color: var(--FFFFFF);
+}
+
+.contact_inner {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    margin-top: 3rem;
+}
+.contact_inner > button {
+    width: 100%;
+    height: 4.2rem;
+    border-radius: 0.2rem;
+    border: 0;
+    background-color: var(--4D4D4D);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--FFFFFF);
+}
+.i-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+.i-box label {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--222);
+}
+.i-box input,
+.i-box textarea {
+    width: 100%;
+    height: 4rem;
+    padding: 0 1.2rem;
+    border-radius: 0.4rem;
+    border: 0.1rem solid var(--D9D9D9);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--222);
+    outline: none;
+}
+.i-box input::placeholder,
+.i-box textarea::placeholder {
+    color: var(--A1A1A1);
+}
+.i-box textarea {
+    resize: none;
+    width: 100%;
+    height: 26rem;
+    padding: 1.4rem 1.8rem;
+}
+
+/* 서비스 모달 */
+.service_modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+}
+.service_modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+.service_modal .service_modal_inner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--FFFFFF);
+    border-radius: 2rem;
+    padding: 2.4rem;
+    border: 0.1rem solid var(--EAEAEA);
+    box-shadow: 0 0rem 0.6rem 0.1rem rgba(0, 0, 0, 0.05);
+    user-select: none;
+}
+.service_modal .modal-t {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.service_modal .modal-t h6 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--222);
+}
+.service_modal .modal-t p {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--7A7A7A);
+}
+.service_modal .modal-c {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.8rem 0 2rem;
+}
+.service_modal .modal-c span,
+.service_modal .modal-b span {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--4D4D4D);
+}
+.service_modal .modal-c p {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--7A7A7A);
+}
+.service_modal .modal-b ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 1.2rem 0 1.4rem;
+}
+.service_modal .modal-b ul li {
+    list-style: disc;
+    margin-left: 1.8rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--6C6C6C);
+}
+.service_modal .modal-b p {
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--4D4D4D);
+}
+.service_modal_inner > button {
+    width: 100%;
+    height: 4.4rem;
+    border-radius: 0.4rem;
+    border: 0;
+    background-color: var(--secondary);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--FFFFFF);
+    margin-top: 4rem;
+}

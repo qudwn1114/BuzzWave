@@ -1,0 +1,114 @@
+:root {
+    --primary: #ff0033;
+    --secondary: #ff006f;
+    --000: #000000;
+    --222: #222222;
+    --4D4D4D: #4d4d4d;
+    --6C6C6C: #6c6c6c;
+    --7A7A7A: #7a7a7a;
+    --939393: #939393;
+    --A1A1A1: #a1a1a1;
+    --A2A2A2: #a2a2a2;
+    --AAAAAA: #aaaaaa;
+    --B6B6B6: #b6b6b6;
+    --D9D9D9: #d9d9d9;
+    --EAEAEA: #eaeaea;
+    --EEEFF2: #eeeff2;
+    --F0F0F0: #f0f0f0;
+    --F2F3F8: #f2f3f8;
+    --F3F3F3: #f3f3f3;
+    --F4F4F4: #f4f4f4;
+    --F7F7F7: #f7f7f7;
+    --F7F8FB: #f7f8fb;
+    --FAFAFA: #fafafa;
+    --F9F9F9: #f9f9f9;
+    --FFFFFF: #ffffff;
+    --system-error: #ff5252;
+    --system-success: #5396ff;
+}
+
+.__web {
+    padding-top: 6.4rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 120rem;
+    min-width: 120rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.error,
+.success {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--system-error);
+    margin-top: -0.2rem;
+    padding-left: 0.5rem;
+}
+.success {
+    color: var(--system-success);
+}
+
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: var(--FFFFFF);
+    border-bottom: 0.1rem solid var(--EAEAEA);
+    z-index: 100;
+}
+.header_container {
+    display: flex;
+    align-items: center;
+}
+.header_logo img {
+    display: block;
+    width: 6rem;
+    height: auto;
+}
+.header_inner {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header_nav {
+    padding: 0 5rem;
+}
+.header_nav ul {
+    display: flex;
+    align-items: center;
+    gap: 5.4rem;
+}
+.header_inner > a,
+.header_nav ul li a {
+    display: inline-flex;
+    align-items: center;
+    height: 6.4rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--222);
+}
+
+.footer {
+    padding: 5rem 0;
+    background-color: var(--F3F3F3);
+}
+.footer_inner ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 3rem;
+}
+.footer_inner ul li,
+.footer_inner > p {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--A2A2A2);
+}
+.footer_inner > p {
+    font-size: 1.2rem;
+}
