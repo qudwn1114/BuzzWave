@@ -202,6 +202,26 @@ def activate(request: HttpRequest, uidb64, token):
             return render(request, 'authentication/activation_complete.html', {'username' : user.username})
         else:
             return render(request, 'authentication/activation_error.html', {'error' : '만료 된 링크입니다.'})
+        
+
+class FindUsernameView(View):
+    '''
+        아이디 찾기
+    '''
+    def get(self, request: HttpRequest, *args, **kwargs):
+        context = {}
+        if request.user.is_authenticated:
+            return redirect('website:home')
+        return render(request, 'authentication/find_username.html', context)
+    
+    def post(self, request: HttpRequest, *args, **kwargs):
+        email = request.POST['email']
+        try:
+            user = User.objects.get(email=email)
+        except:
+            return JsonResponse({'message':'가입된 이메일이 없습니다.'}, status = 400)
+        return JsonResponse({'message':f'가입하신 아이디는 {user.username} 입니다.'}, status = 200)
+    
 
 @require_http_methods(["POST"])
 def contact(request: HttpRequest):

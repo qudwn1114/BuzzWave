@@ -40,7 +40,7 @@
               <p class="error" id="login-error"></p>
           </div>
           <div class="find">
-              <a href="#">아이디 찾기</a>|
+              <a href="{% url 'website:find_username' %}">아이디 찾기</a>|
               <a href="{% url 'website:password_reset' %}">비밀번호 찾기</a>
           </div>
           <button type="button" id="btn-login">로그인</button>
