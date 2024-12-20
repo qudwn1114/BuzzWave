@@ -1,5 +1,3 @@
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
 function resend(elem){
     elem.innerHTML = '<i class="fa fa-spinner" aria-hidden="true"></i> Loading...';
     elem.disabled=true;

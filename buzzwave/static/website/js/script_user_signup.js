@@ -17,7 +17,6 @@ const message_password = document.getElementById("message-password");
 const error_signup = document.getElementById("signup-error");
 
 const btn_submit = document.getElementById("btn-submit");
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
 function checkEmail() {
     message_email.innerText = ''

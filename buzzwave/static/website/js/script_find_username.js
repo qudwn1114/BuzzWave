@@ -2,8 +2,6 @@ const btn_submit = document.getElementById("btn-submit");
 const email = document.getElementById('email');
 const username_message = document.getElementById('username-message');
 
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
 btn_submit.addEventListener("click", () => {
     const data =new FormData(document.getElementById("emailform"));
     if(!validation()){

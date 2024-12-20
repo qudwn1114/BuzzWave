@@ -1,5 +1,3 @@
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
 function deletePost(elem){
     if (!confirm("삭제 하시겠습니까?")) {
         return;

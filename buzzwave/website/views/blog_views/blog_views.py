@@ -9,7 +9,6 @@ from django.db.models.functions import Concat
 from django.db.models import CharField, Value as V, F, Case, When, Func, Prefetch, Count
 from django.conf import settings
 from website.models import Blog, Tag, BlogTag
-from website.forms import BlogForm
 import traceback
 
 class BlogView(View):
@@ -92,7 +91,6 @@ class BlogCreateView(View):
     '''
     def get(self, request: HttpRequest, *args, **kwargs):
         context = {}
-        context['form'] = BlogForm
         user = request.user
         if not user.is_authenticated:
             next_url = request.get_full_path()
@@ -192,7 +190,6 @@ class BlogEditView(View):
         if not user.is_superuser or blog.user != user:
             Http404('You do not have permission')
 
-        context['form'] = BlogForm(instance=blog)
         tags = ''
         for i in blog.blog_tag.all():
             tags += f'{i.tag.name}, '

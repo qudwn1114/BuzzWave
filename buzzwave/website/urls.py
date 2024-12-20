@@ -5,6 +5,7 @@ from website.views.authentication_views.auth_views import HomeView, LoginView, S
 from website.views.authentication_views.password_reset_views import UserPasswordResetView, UserPasswordResetDoneView, CustomPasswordResetConfirmView, UserPasswordResetCompleteView
 from website.views.authentication_views.validate_views import check_username, check_email, check_birth
 from website.views.blog_views.blog_views import BlogView, BlogCreateView, BlogDetailView, BlogEditView
+from website.views.blog_views.summernote_views import summernote_image_upload_view
 
 app_name = 'website'
 urlpatterns = [
@@ -33,4 +34,5 @@ urlpatterns = [
     path('blog-create/', BlogCreateView.as_view(), name='blog_create'),
     path('blog/<int:pk>/', BlogDetailView.as_view(), name='blog_detail'),
     path('blog-edit/<int:pk>/', BlogEditView.as_view(), name='blog_edit'),
+    path('summernote/upload-image/', summernote_image_upload_view),
 ]

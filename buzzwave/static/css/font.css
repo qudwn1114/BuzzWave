@@ -1,0 +1,32 @@
+@font-face {
+    src : url("../fonts/나눔고딕.ttf");
+    font-family: "나눔고딕";
+}
+@font-face {
+    src : url("../fonts/나눔명조.ttf");
+    font-family: "나눔명조";
+}
+@font-face {
+    src : url("../fonts/나눔바른고딕.ttf");
+    font-family: "나눔바른고딕";
+}
+@font-face {
+    src : url("../fonts/나눔바른펜.ttf");
+    font-family: "나눔바른펜";
+}
+@font-face {
+    src : url("../fonts/나눔손글씨붓.ttf");
+    font-family: "나눔손글씨붓";
+}
+@font-face {
+    src : url("../fonts/나눔손글씨펜.ttf");
+    font-family: "나눔손글씨펜";
+}
+@font-face {
+    src : url("../fonts/나눔스퀘어.ttf");
+    font-family: "나눔스퀘어";
+}
+@font-face {
+    src : url("../fonts/맑은고딕.ttf");
+    font-family: "맑은고딕";
+}

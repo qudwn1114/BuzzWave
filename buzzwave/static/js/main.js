@@ -1,3 +1,5 @@
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
 // 헤더 메뉴 클릭 이벤트
 const header = document.querySelector(".header");
 const headerNavLinks = document.querySelectorAll(".header_nav a");

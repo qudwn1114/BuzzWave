@@ -4,8 +4,6 @@ const password = document.getElementById('password');
 
 const error_login = document.getElementById('login-error');
 
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
 btn_login.addEventListener("click", () => {
     const data =new FormData(document.getElementById("loginForm"));
     if(!validation()){

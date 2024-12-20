@@ -1,46 +1,66 @@
 {% extends "layouts/website_base.html" %}
 {% load static %}
 
+{% block title %}
+  <title>D'Nova | Blog 포스팅</title>
+{% endblock %}
+
 {% block stylesheets %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+<link rel="stylesheet" href="{% static 'website/summernote/summernote-lite.min.css' %}">
 {% endblock stylesheets %}
 
 {% block content %}
-<div class="main">
-    <section class="module">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-              <h4 class="font-alt mb-0">Blog 포스트</h4>
-              <hr class="divider-w mt-10 mb-20">
-              <form class="form" role="form" id="data-form">
-                <div class="form-group">
-                    {{ form.title }}
-                </div>
-                <div class="form-group">
-                    {{ form.content }}
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" id="tags" name="tags" placeholder="Tags">
-                    <p>, 로 태그 구분해서 작성. 예) D`Nova, tag, post</p>
-                </div>
-                <div class="form-group">
-                    {{ form.image }}
-                    <p>썸네일 이미지 (필수 x)</p>
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-b btn-round" type="button" id="btn_create">Submit</button>
-                </div>
-            </form>
-            </div>
+<section class="login_section">
+  <div class="login_container container">
+      <form id="data-form" style="max-width: 100rem;">
+          <h2>블로그 포스팅</h2>
+          <div class="i-box_container">
+              <div class="i-box">
+                  <label for="title">제목</label>
+                  <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      placeholder="제목을 입력해주세요. (필수)"
+                  />
+              </div>
+              <div class="i-box">
+                  <label for="content">내용</label>
+                  <textarea id="content" name="content"></textarea>
+              </div>
+              <div class="i-box">
+                <label for="tags">태그 (선택)</label>
+                <input
+                    type="text"
+                    id="tags"
+                    name="tags"
+                    placeholder="Tags"
+                />
+                <p class="success">, 로 태그 구분해서 작성. 예) D`Nova, tag, post</p>
+              </div>
+              <div class="i-box">
+                <label for="image">썸네일 (선택)</label>
+                <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                />
+              </div>
           </div>
-        </div>
-      </section>
-
-    {% include 'includes/website/footer.html' %}
-</div>
+          <div class="find">
+          </div>
+          <button type="button" id="btn_create">등록</button>
+      </form>
+  </div>
+</section>
 
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="{% static 'website/js/script_blog_create.js' %}"></script>
+<script src="{% static 'website/summernote/summernote-lite.min.js' %}"></script>
+<script src="{% static 'website/summernote/lang/summernote-ko-KR.js' %}"></script>
+<script src="{% static 'js/script_summernote.js' %}?v=20241220"></script>
+<script type="text/javascript" src="{% static 'website/js/script_blog_create.js' %}?v=20241220"></script>
 {% endblock javascripts %}

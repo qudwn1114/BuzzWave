@@ -1,7 +1,6 @@
 const title = document.getElementById("title");
+const content = document.getElementById("content");
 const btn_create = document.getElementById("btn_create");
-
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
 btn_create.addEventListener("click", () => {
     if(!validation()){
@@ -44,6 +43,10 @@ btn_create.addEventListener("click", () => {
 function validation(){
     if(title.value === ""){
         title.focus();
+        return false;
+    }
+    if(content.value === ""){
+        content.focus();
         return false;
     }
     return true;

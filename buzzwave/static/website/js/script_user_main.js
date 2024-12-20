@@ -92,7 +92,6 @@ const error_message = document.getElementById('message-error');
 const semail = document.getElementById("semail");
 const btn_subscribe = document.getElementById('btn_subscription');
 
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 
 btn_submit.addEventListener("click", async() => {

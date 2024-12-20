@@ -34,9 +34,6 @@ INSTALLED_APPS = [
     #cors
     'corsheaders',
 
-    #summernote
-    'django_summernote',
-
     #app
     'website',
 ]
