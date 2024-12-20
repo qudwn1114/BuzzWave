@@ -114,10 +114,31 @@
     -webkit-box-orient: vertical;
     word-wrap: break-word;
 }
+.blog-detail {
+    margin-bottom: 3rem;
+}
 .blog-detail .date {
     font-size: 1.4rem;
     font-weight: 400;
     color: var(--939393);
+}
+.tag_container ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.tag_container ul li a {
+    position: relative;
+    height: auto;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.6rem;
+    background: var(--secondary-light);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--secondary);
+}
+.tag_container ul li a::before {
+    content: "#";
 }
 .pagination {
     display: flex;

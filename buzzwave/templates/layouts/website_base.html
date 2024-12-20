@@ -14,9 +14,9 @@
 
     <link rel="stylesheet" href="{% static 'css/swiper.bundle.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/common.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/common.css' %}?v=20241220" />
     <link rel="stylesheet" href="{% static 'css/font.css' %}">
+    {% block stylesheets %}{% endblock stylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D2S6KD6CFZ"></script>
     <script>
@@ -25,7 +25,6 @@
       gtag('js', new Date());
       gtag('config', 'G-D2S6KD6CFZ');
     </script>
-    {% block stylesheets %}{% endblock stylesheets %}
   </head>
 
   {% csrf_token %}

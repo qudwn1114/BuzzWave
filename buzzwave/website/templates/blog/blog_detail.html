@@ -7,80 +7,54 @@
 {% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+<link rel="stylesheet" href="{% static 'css/post.css' %}?v=20241220" />
 {% endblock stylesheets %}
 
 
 {% block content %}
 <div class="blog">
-  <div class="container">
-      <div class="search_inner">
-        <form method="get">
-          <div class="search">
-              <img
-                  src="{% static 'images/icons/icon_search.svg' %}"
-                  alt="검색"
-              />
-              <input
-                  type="text"
-                  name="search"
-                  placeholder="검색어를 입력하세요"
-                  value="{{search}}"
-              />
-          </div>
-        </form>
-      </div>
-  </div>
   <div class="blog_container container">
-      <aside class="blog_aside">
-          <div class="s-box">
-              <span>태그 목록</span>
-          </div>
-          <nav class="blog_nav">
-              <ul>
-                  {% if user.is_superuser %}
-                    <li><a href="{% url 'website:blog_create' %}"><b>*** 글 작성하기 ***</b></a></li>
-                  {% endif %}
-                  <li {% if not tag %}class="active"{% endif %} ><a href="{% url 'website:blog'%}">전체보기  ({{blog_total_count}})</a></li>
-                  {% for i in blog_tag_list %}
-                  <li {% if i.name == tag %}class="active"{% endif %}><a href="{% url 'website:blog'%}?tag={{i.name}}">{{i.name}}  ({{i.tag_count}})</a></li>
-                  {% endfor %}
-              </ul>
-          </nav>
-      </aside>
       <article class="blog-list_container">
           <ul class="blog-list">
               <li>
-                  <a href="javascript:;">
-                    {% if blog.image %}
-                      <img src="{{blog.image.url}}" alt="Blog-post Thumbnail"/>
-                    {% else %}
-                      <img
-                          src="{% static 'images/dummy/rec.png' %}"
-                          alt="더미이미지"
-                      />
-                    {% endif %}
-                  </a>
-                  <div class="blog-info">
-                      <a href="javascript:;">{{blog.title}}</a>
+                  <div class="t-box">
+                      <h2>
+                        {{blog.title}}
+                      </h2>
                       <div class="blog-detail">
-                        <span class="date">{{ blog.created_at|date:"Y년 m월 d일" }}</span>
-                        {% if user == blog.user %}
+                          <span class="date">{{ blog.created_at|date:"Y년 m월 d일" }}</span>
+                      </div>
+
+                      {% if user == blog.user %}
                         <a href="{% url 'website:blog_edit' blog.pk %}"><i class="fa-solid fa-pen-to-square"></i> 수정</a>
                         <a href="javascript:;" onclick="deletePost(this)"><i class="fa-solid fa-trash"></i> 삭제</a>
                       {% endif %}
-                    </div>
+
+
+                      {% if blog.blog_tag.all %}
+                      <div class="tag_container">
+                          <ul>
+                            {% for i in blog.blog_tag.all %}
+                              <li>
+                                <a href="{% url 'website:blog'%}?tag={{i.tag.name}}" rel="tag">{{i.tag.name}}</a>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                      {% endif %}
+                  </div>
+                  <a href="#">
+                    {% if blog.image %}
+                      <img src="{{blog.image.url}}" alt="Blog-post Thumbnail"/>
+                    {% else %}
+                      <img src="{% static 'images/dummy/rec.png' %}"alt="더미이미지"/>
+                    {% endif %}
+                  </a>
+                  <div class="blog-info">
                       <p>
                         {{blog.content|safe}}
-                      </p> 
+                      </p>
                   </div>
-                  {% if blog.blog_tag.all %}
-                  <div class="tags font-serif">
-                    {% for i in blog.blog_tag.all %}
-                      <a href="{% url 'website:blog'%}?tag={{i.name}}" rel="tag">{{i.tag.name}}</a>
-                    {% endfor %}
-                  </div>
-                  {% endif %}
               </li>
           </ul>
       </article>

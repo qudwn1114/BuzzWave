@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+<link rel="stylesheet" href="{% static 'css/blog.css' %}?v=20241220" />
 {% endblock stylesheets %}
 
 
@@ -73,12 +73,16 @@
                       <span class="date">{{ i.created_at|date:"Y년 m월 d일" }}</span>
                   </div>
                   {% if i.tags %}
-                  <div class="tags font-serif">
-                    {% for tag in i.tags %}
-                      <a href="{% url 'website:blog'%}?tag={{tag}}" rel="tag">{{tag}}</a>
-                    {% endfor %}
-                  </div>
-                  {% endif %}
+                  <div class="tag_container">
+                    <ul>
+                      {% for tag in i.tags %}
+                        <li>
+                            <a href="{% url 'website:blog'%}?tag={{tag}}">{{tag}}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}                  
               </li>
             {% endfor %}
           </ul>

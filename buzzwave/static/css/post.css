@@ -1,0 +1,70 @@
+.__web {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.blog {
+    padding: 12rem 0 14rem;
+}
+.blog-list_container {
+    max-width: 78.7rem;
+    margin: 0 auto;
+}
+.blog-list li > .t-box {
+    padding-bottom: 2rem;
+    margin-bottom: 5rem;
+    border-bottom: 0.1rem solid var(--EEEFF2);
+}
+.blog-list li > .t-box h2 {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--222);
+    margin-bottom: 3rem;
+    word-break: keep-all;
+}
+.blog-detail {
+    margin-bottom: 3rem;
+}
+.blog-detail .date {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--939393);
+}
+.blog-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin: 3rem 0;
+}
+.blog-info p {
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--4D4D4D);
+}
+
+.tag_container ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.tag_container ul li a {
+    display: block;
+    position: relative;
+    height: auto;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.6rem;
+    background: var(--secondary-light);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--secondary);
+}
+.tag_container ul li a::before {
+    content: "#";
+}
