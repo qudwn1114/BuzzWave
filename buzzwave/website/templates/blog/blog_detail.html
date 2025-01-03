@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{% static 'css/post.css' %}?v=20241220" />
+<link rel="stylesheet" href="{% static 'css/post.css' %}?v=20250103" />
 {% endblock stylesheets %}
 
 
@@ -23,18 +23,9 @@
                       </h2>
                       <div class="blog-detail">
                           <span class="date">{{ blog.created_at|date:"Y년 m월 d일" }}</span>
-                          {% if user == blog.user %}
                             <a class="date" href="{% url 'website:blog_edit' blog.pk %}"> | <i class="fa-solid fa-pen-to-square"></i> 수정</a>
                             <a class="date" href="javascript:;" onclick="deletePost(this)"> | <i class="fa-solid fa-trash"></i> 삭제</a>
-                          {% endif %}
                       </div>
-
-                      {% if user == blog.user %}
-                        <a href="{% url 'website:blog_edit' blog.pk %}"><i class="fa-solid fa-pen-to-square"></i> 수정</a>
-                        <a href="javascript:;" onclick="deletePost(this)"><i class="fa-solid fa-trash"></i> 삭제</a>
-                      {% endif %}
-
-
                       {% if blog.blog_tag.all %}
                       <div class="tag_container">
                           <ul>
